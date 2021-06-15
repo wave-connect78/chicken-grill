@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Cormorant', serif;
+    color: #593207;
+}
+p{
+    font-size: 1.2em;
+}
+/*header*/
+header .navi .logo{
+    width: 25%;
+}
+header .navi .logo img{
+    width: 65%;
+    margin: 0 0px 0 -22px;
+    height: 100%;
+}
+header .top-navi{
+    background-color: #fff;
+}
+header .top-navi-content{
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .top-navi-content .fab{
+    margin-right: 15px;
+}
+header .top-navi-content .fab,header .top-navi-content .fas{
+    font-size: 1.4em;
+    color: #FFA91E;
+}
+.top-navi .contact{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-navi .contact p:first-child{
+    margin-right: 20px;
+}
+.top-navi-content p{
+    display: flex;
+    align-items: center;
+}
+header .top-navi-content p .fas{
+    font-size: 1.1em;
+    margin-right: 7px;
+}
+header .navi-bloc{
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+header .navi{
+    background-color: #FFA91E;
+}
+header .navi-content{
+    width: 50%;
+    display: flex;
+}
+header .navi-content a{
+    text-decoration: none;
+    color: #593207;
+    font-weight: 600;
+    font-size: 1.5em;
+    padding-bottom: 8px;
+}
+header .navi-content a:hover{
+    border-bottom: 1px solid #fff;
+}
+header .navi-content a:not(:last-child){
+    margin-right: 20px;
+}
+/*footer*/
+footer .footer-top,footer .footer-bottom{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+footer .follow-us,footer .contact-us{
+    width: 20%;
+}
+footer hr{
+    width: 50%;
+    margin: 45px auto;
+}
+footer{
+    background-color: #f1f1f1;
+    padding: 40px 0;
+}
+footer p{
+    line-height: 1.4;
+}
+footer h4{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+footer .social-media .fab,footer .social-media .fas{
+    font-size: 1.4em;
+    color: #FFA91E;
+}
+footer .social-media .fab{
+    margin-right: 15px;
+}
+footer .contact-us .fas{
+    font-size: 1.1em;
+    margin-right: 7px;
+    color: #FFA91E;
+}
+footer .payment{
+    display: flex;
+    justify-content: flex-end;
+}
+footer .payment img:not(:last-child){
+    margin-right: 20px;
+}
