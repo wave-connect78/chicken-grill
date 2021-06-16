@@ -10,7 +10,7 @@ $(function(){
             //console.log('test1');
         }
     });
-    $('header .menu').on('click',function(){
+    $('header .menu, header .burger-icon').on('click',function(){
         if ($('.navi-content').hasClass('activeNav')) {
             //console.log('test0');
             $('.navi-content').hide(300);

@@ -13,16 +13,19 @@ p{
     border-left: 3px solid rgb(236, 51, 51);
     margin: 10px 0;
     padding-left: 10px;
+    color: rgb(236, 51, 51);
 }
 .success{
     border-left: 3px solid rgb(14, 172, 14);
     margin: 10px 0;
     padding-left: 10px;
+    color: rgb(14, 172, 14);
 }
 .info{
     border-left: 3px solid rgb(68, 68, 226);
     margin: 10px 0;
     padding-left: 10px;
+    color: rgb(68, 68, 226);
 }
 /*header*/
 header .navi .logo{
@@ -223,7 +226,8 @@ footer .payment img:not(:last-child){
     background-color: #fff;
     position: absolute;
     top: -26px;
-    left: 170px;
+    left: calc(50% - 75% / 2);
+    width: 75%;
 }
 .withotherprovider .google{
     background-color: #DD4B39;
@@ -233,7 +237,7 @@ footer .payment img:not(:last-child){
     font-size: 1.5em;
     padding: 3px 20px;
     margin-bottom: 15px;
-    width: 50%;
+    width: 75%;
 }
 .withotherprovider .fab{
     margin-right: 8px;
@@ -245,7 +249,7 @@ footer .payment img:not(:last-child){
     outline: none;
     font-size: 1.5em;
     padding: 3px 20px;
-    width: 50%;
+    width: 75%;
 }
 .auth .sign{
     display: none;
@@ -267,6 +271,7 @@ footer .payment img:not(:last-child){
         top: 53px;
         width: 100%;
         background-color: #FFA91E;
+        transition: all .2s;
     }
     header .navi-content nav a{
         color: #fff;
@@ -286,6 +291,9 @@ footer .payment img:not(:last-child){
     }
     footer .follow-us, footer .contact-us{
         width: 30%;
+    }
+    .auth{
+        width: 40%;
     }
 }
 @media (max-width: 768px) {
@@ -314,6 +322,21 @@ footer .payment img:not(:last-child){
     header .navi-content nav{
         top: 49px;
     }
+    .auth{
+        width: 50%;
+    }
+    .withotherprovider .google{
+        width: 100%;
+    }
+    .withotherprovider .facebook{
+        width: 100%;
+    }
+    .account{
+        flex-direction: column;
+    }
+    .account button{
+        margin-bottom: 15px;
+    }
 }
 @media (max-width: 546px) {
     footer .footer-top{
@@ -332,6 +355,9 @@ footer .payment img:not(:last-child){
     header .navi-content{
         width: 75%;
     }
+    .auth {
+        width: 60%;
+    }
 }
 @media (max-width: 472px) {
     footer .follow-us{
@@ -346,5 +372,14 @@ footer .payment img:not(:last-child){
     }
     header .navi-content{
         width: 109%;
+    }
+    .auth {
+        width: 70%;
+    }
+}
+@media (max-width: 375px) {
+    .auth{
+        box-shadow: none;
+        width: 100%;
     }
 }
