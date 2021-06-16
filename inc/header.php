@@ -55,7 +55,7 @@
                                 <a href="#">Desserts</a>
                             </div>
                         </a>-->
-                        <a href="#">Qui sommes-nous</a>
+                        <a href="<?php echo RACINE_SITE ?>qui-sommes-nous">Qui sommes-nous</a>
                         <a href="#">Contact</a>
                     </nav>
                 </div>
