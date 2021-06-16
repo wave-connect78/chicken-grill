@@ -32,26 +32,40 @@
             </div>
         </div>
         <div class="navi">
+            <div class="menu-burger">
+                <span class="menu">MENU</span>
+                <div class="burger-icon">
+                    <div class="burger"></div>
+                    <div class="burger"></div>
+                    <div class="burger"></div>
+                </div>
+            </div>
             <div class="navi-bloc">
                 <div class="logo"><a href="<?php echo RACINE_SITE; ?>"><img src="../photos/logo.png" alt="chicken grill"></a></div>
                 <div class="navi-content">
-                        <nav>
-                            <a href="#">Nos produits</a>
-                            <a href="#">Devenir franchisé</a>
-                            <a href="#">Notre catalogue 
-                                <i class="fas fa-sort-down"></i>
-                                <!--<div class="categorie">
-                                    <a href="#">Rôtisserie</a>
-                                    <a href="#">Accompagnement</a>
-                                    <a href="#">Burger</a>
-                                    <a href="#">Desserts</a>
-                                </div>-->
-                            </a>
-                            <a href="#">Contact</a>
-                        </nav>
+                    <nav>
+                        <a href="#">Nos produits</a>
+                        <a href="#">Devenir franchisé</a>
+                        <!--<a href="#">Notre catalogue 
+                            <i class="fas fa-sort-down"></i>
+                            <div class="categorie">
+                                <a href="#">Rôtisserie</a>
+                                <a href="#">Accompagnement</a>
+                                <a href="#">Burger</a>
+                                <a href="#">Desserts</a>
+                            </div>
+                        </a>-->
+                        <a href="#">Qui sommes-nous</a>
+                        <a href="#">Contact</a>
+                    </nav>
                 </div>
                 <div class="search">
-                    <i class="fas fa-search"></i>
+                    <div class="search-bloc">
+                        <i class="fas fa-search"></i>
+                        <div class="search-content">
+                            <input type="search" class="form-control" id="search" name="search" placeholder="Rechercher des produits">
+                        </div>
+                    </div>
                     <i class="fas fa-shopping-basket"></i>
                     <a href="<?php RACINE_SITE ?>../auth"><i class="far fa-user"></i></a>
                 </div>
