@@ -371,6 +371,9 @@ footer .payment img:not(:last-child){
     .account button{
         margin-bottom: 15px;
     }
+    .about-us-content .img img{
+        height: 60vh;
+    }
 }
 @media (max-width: 546px) {
     footer .footer-top{
@@ -392,6 +395,9 @@ footer .payment img:not(:last-child){
     .auth {
         width: 60%;
     }
+    .about-us-content .img img{
+        height: 50vh;
+    }
 }
 @media (max-width: 472px) {
     footer .follow-us{
@@ -409,6 +415,15 @@ footer .payment img:not(:last-child){
     }
     .auth {
         width: 70%;
+    }
+    .about-us{
+        width: 100%;
+    }
+    .about-us h3{
+        margin-left: 10%;
+    }
+    .about-us .text-content{
+        padding: 0 10%;
     }
 }
 @media (max-width: 375px) {
