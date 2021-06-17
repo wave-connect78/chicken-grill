@@ -28,8 +28,11 @@
             <div class="withotherprovider">
                 <div class="line"></div>
                 <p>Se connecter avec</p>
-                <button class="google"><i class="fab fa-google-plus-g"></i>Google</button><br>
-                <button class="facebook"><i class="fab fa-facebook-f"></i>Facebook</button>
+                <!--<button id="gSignIn" class="google"><i class="fab fa-google-plus-g"></i>Google</button><br>-->
+                <div class="g-signin2 google" data-onsuccess="onSignIn"></div>
+                <!--<button class="facebook"><i class="fab fa-facebook-f"></i>Facebook</button>-->
+                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+                
             </div>
         </div>
         <div class="sign">
@@ -54,7 +57,7 @@
             </form>
         </div>
     </div>
-
+    
 
     <script>
         let URL = 'http://localhost/chicken-grill/profil/';
@@ -116,7 +119,63 @@
                     },'json');
                 }
             });
-        })
+            $('.google').on('click',function(){
+
+            });
+        });
+        
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            $.post('../inc/controls.php',{nom:profile.getName(),email:profile.getEmail(),mdp:'google',postType:"googleLogin"},function(res){
+                console.log(res);
+                if (res.success) {
+                    window.location.href = URL;
+                }
+            },'json');
+        }
+        
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '2027066680767202',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v11.0'
+            });
+            
+            FB.AppEvents.logPageView();   
+            
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function checkLoginState() {               
+            FB.getLoginStatus(function(response) {   
+            statusChangeCallback(response);
+            });
+        }
+
+        function statusChangeCallback(response) { 
+            console.log('statusChangeCallback');
+            console.log(response);                   
+            if (response.status === 'connected') {   
+                testAPI();  
+            } else {                                 
+            //document.getElementById('status').innerHTML = 'Please log ' +
+                'into this webpage.';
+            }
+        }
+        function testAPI() {                      
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+            console.log('Successful login for: ' + response.name);
+        });
+  }
     </script>
 <?php
     require_once '../inc/footer.php';

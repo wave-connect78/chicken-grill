@@ -213,7 +213,7 @@ footer .payment img:not(:last-child){
 }
 .withotherprovider{
     position: relative;
-    text-align: center;
+    text-align: center !important;
 }
 .withotherprovider .line{
     width: 100%;
@@ -230,14 +230,11 @@ footer .payment img:not(:last-child){
     width: 75%;
 }
 .withotherprovider .google{
-    background-color: #DD4B39;
-    color: #fff;
-    border: 0;
-    outline: none;
-    font-size: 1.5em;
-    padding: 3px 20px;
     margin-bottom: 15px;
-    width: 75%;
+    width: 100% !important;
+}
+.withotherprovider .abcRioButton {
+    width: 100% !important;
 }
 .withotherprovider .fab{
     margin-right: 8px;
@@ -249,7 +246,7 @@ footer .payment img:not(:last-child){
     outline: none;
     font-size: 1.5em;
     padding: 3px 20px;
-    width: 75%;
+    width: 100%;
 }
 .auth .sign{
     display: none;
