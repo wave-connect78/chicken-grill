@@ -57,6 +57,7 @@
 
 
     <script>
+        let URL = 'http://localhost/chicken-grill/profil/';
         $(function(){
             $('.account .create-account').on('click',function(){
                 $('.auth .login').css({display:'none'});
@@ -77,7 +78,16 @@
                 }
                 if ($('.login #email').val() != '' && $('.login #mdp').val() != '') {
                     $.post('../inc/controls.php',{email:$('.login #email').val(),mdp:$('.login #mdp').val(),postType:"login"},function(res){
-                        console.log(res);
+                        if (res.errorMdp) {
+                            $('.login .mdp').append('<div class="error">'+res.errorMdp+'</div>'); 
+                        }
+                        if (res.error) {
+                            $('.login').prepend('<div class="error">'+res.error+'</div>');
+                        }
+                        if (res.success) {
+                            window.location.href = URL;
+                        }
+                        //console.log(res);
                     },'json');
                 }
             });

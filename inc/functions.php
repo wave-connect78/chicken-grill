@@ -23,3 +23,12 @@
             die('Erreur produit lors de l\'execution de la requête');
         }
     }
+    
+    function isOn(){
+        if (!empty($_SESSION['user'])) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
