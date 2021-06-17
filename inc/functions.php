@@ -10,7 +10,7 @@
 
     function executeQuery($query,$marqueur = array()){
         foreach ($marqueur as $key => $value) {
-            $marqueur[$key] = htmlspecialchars($value);
+            $marqueur[$key] = htmlspecialchars($value,ENT_QUOTES);
         }
 
         global $pdo;

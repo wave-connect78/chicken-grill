@@ -84,6 +84,7 @@
             $('.sign form').on('submit',function(e){
                 e.preventDefault();
                 $('.sign .error').remove();
+                $('.sign .success').remove();
                 if ($('.sign #nom').val() == '') {
                     $('.sign .nom').append('<div class="error">Votre champs est vide</div>');
                 }
