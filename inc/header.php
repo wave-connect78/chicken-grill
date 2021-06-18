@@ -65,6 +65,13 @@
                     </nav>
                 </div>
                 <div class="search">
+                    <?php 
+                        if (isResto1On()) {
+                            ?>
+                            <a href="<?php echo RACINE_SITE ?>admin"><i class="fas fa-cogs"></i></a>
+                            <?php
+                        }
+                    ?>
                     <div class="search-bloc">
                         <i class="fas fa-search"></i>
                         <div class="search-content">

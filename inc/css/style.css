@@ -272,6 +272,43 @@ footer .payment img:not(:last-child){
     height: 450px;
     object-fit: cover;
 }
+/*backoffice*/
+.product-data h2{
+    text-align: center;
+    margin: 30px 0;
+}
+.product-data .gestion-product-navi{
+    display: flex;
+    justify-content: center;
+}
+.gestion-product-navi nav p{
+    cursor: pointer;
+}
+.product-data .product{
+    display: block;
+}
+.product-data .commande{
+    display: none;
+}
+.product .insert-product-data{
+    width: 80%;
+    margin: 30px auto;
+}
+.product .insert-product-data h4{
+    margin-bottom: 20px;
+}
+.product .insert-product-data form{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.product .insert-product-data form .left,.product .insert-product-data form .right{
+    width: 47%;
+}
+.product-data .product-table{
+    width: 80%;
+    margin: 35px auto;
+}
 /*media query*/
 
 @media (max-width: 1086px) {

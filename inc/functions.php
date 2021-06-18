@@ -32,3 +32,11 @@
         }
         
     }
+
+    function isResto1On(){
+        if (isOn() && $_SESSION['user']['statut'] == 'admin-resto1') {
+            return true;
+        }else{
+            return false;
+        }
+    }
