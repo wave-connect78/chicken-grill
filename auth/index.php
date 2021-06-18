@@ -1,6 +1,8 @@
 <?php
     require_once '../inc/init.php';
-
+    if (isOn()) {
+        header('location:'.RACINE_SITE.'profil');
+    }
     $title = 'Connexion à mon compte';
     require_once '../inc/header.php';
 
@@ -29,9 +31,9 @@
                 <div class="line"></div>
                 <p>Se connecter avec</p>
                 <!--<button id="gSignIn" class="google"><i class="fab fa-google-plus-g"></i>Google</button><br>-->
-                <div class="g-signin2 google" data-onsuccess="onSignIn"></div>
-                <!--<button class="facebook"><i class="fab fa-facebook-f"></i>Facebook</button>-->
-                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+                <div class="g-signin2 google" data-onsuccess="onSignIn" data-theme="light"></div>
+                <button class="facebook" data-scope="email"><i class="fab fa-facebook-f"></i>Facebook</button>
+                <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" perms="email" onlogin="checkLoginState();"></div>-->
                 
             </div>
         </div>
@@ -119,15 +121,16 @@
                     },'json');
                 }
             });
-            $('.google').on('click',function(){
-
+            $('.facebook').on('click',function(){
+                fbLogin();
             });
         });
         
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            $.post('../inc/controls.php',{nom:profile.getName(),email:profile.getEmail(),mdp:'google',postType:"googleLogin"},function(res){
-                console.log(res);
+            let guid = profile.getId();
+            $.post('../inc/controls.php',{user_google_id:guid,nom:profile.getName(),email:profile.getEmail(),mdp:'google',postType:'googleLogin'},function(res){
+                //console.log(res);
                 if (res.success) {
                     window.location.href = URL;
                 }
@@ -142,7 +145,13 @@
             version    : 'v11.0'
             });
             
-            FB.AppEvents.logPageView();   
+            //FB.AppEvents.logPageView();
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    //display user data
+                    getFbUserData();
+                }
+            });   
             
         };
 
@@ -154,28 +163,33 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        function checkLoginState() {               
-            FB.getLoginStatus(function(response) {   
-            statusChangeCallback(response);
+        function fbLogin() {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    // Get and display the user profile data
+                    getFbUserData();
+                } else {
+
+                }
+            }, {scope: 'email',auth_type: 'rerequest'});
+        }
+        function getFbUserData(){
+            FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture,permissions'},
+            function (response) {
+                if (response) {
+                    if (response.email !='' || response.email != undefined) {
+                        let nom = response.first_name+' '+response.last_name;
+                        $.post('../inc/controls.php',{nom:nom,email:response.email,user_facebook_id:response.id,mdp:'facebook',postType:'facebookLogin'},function(res){
+                            if (res.success) {
+                                window.location.href = URL;
+                            }
+                        },'json');
+                    }
+                }
+                //console.log(response);
             });
         }
-
-        function statusChangeCallback(response) { 
-            console.log('statusChangeCallback');
-            console.log(response);                   
-            if (response.status === 'connected') {   
-                testAPI();  
-            } else {                                 
-            //document.getElementById('status').innerHTML = 'Please log ' +
-                'into this webpage.';
-            }
-        }
-        function testAPI() {                      
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-            console.log('Successful login for: ' + response.name);
-        });
-  }
+  
     </script>
 <?php
     require_once '../inc/footer.php';

@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
     <meta name="google-signin-client_id" content="407013073336-f7279jdm7et9ojql6m2p8afcqmd7ramv.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
