@@ -309,6 +309,37 @@ footer .payment img:not(:last-child){
     width: 80%;
     margin: 35px auto;
 }
+.bloc-title{
+    display: flex;
+    justify-content: space-between;
+}
+/*nos produits*/
+.carousel-item img{
+    height: 75vh !important;
+    object-fit: cover;
+}
+.single-product,.menu,.menu-simple,.menu-double,.boisson{
+    width: 80%;
+    margin: 75px auto;
+}
+.single-product h3,.menu h3,.menu-simple h3,.menu-double h3,.boisson h3{
+    margin-bottom: 30px;
+}
+.single-product-content,.menu-content,.menu-simple-content,.menu-double-content,.boisson-content{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.single-product-content .card,.menu-content .card,.menu-simple-content .card,.menu-double-content .card,.boisson-content .card{
+    margin-bottom: 40px;
+    margin-right: 1%;
+    width: 19%;
+}
+.single-product-content .card .btn, .menu-content .card .btn, .menu-simple-content .card .btn,.menu-double-content .card .btn,.boisson-content .card .btn{
+    background-color: #593207;
+    color: #fff;
+    border: none;
+}
 /*media query*/
 
 @media (max-width: 1086px) {

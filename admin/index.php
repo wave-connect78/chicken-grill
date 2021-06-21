@@ -25,8 +25,8 @@
                 $promo = $_POST['promo'];
             }
             
-            if (isResto1On()) {
-                executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,product_img_url,prix_promo,promo,resto_secteur,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:product_img_url,:prix_promo,:promo,:resto_secteur,NOW(),:admin_resto_id)",array(
+            if (isRestoAsnieresOn()) {
+                executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,product_img_url,prix_promo,promo,resto_secteur,produit_type,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:product_img_url,:prix_promo,:promo,:resto_secteur,:produit_type,NOW(),:admin_resto_id)",array(
                     ':product_id' => $_POST['product_id'],
                     ':product_name' => $_POST['product_name'],
                     ':product_description' => $_POST['description'],
@@ -34,7 +34,8 @@
                     ':product_img_url' => $product_img_url,
                     ':prix_promo' => $prix_promo,
                     ':promo' => $promo,
-                    ':resto_secteur' => 'resto1',
+                    ':resto_secteur' => 'asnieres',
+                    ':produit_type' => $_POST['produit_type'],
                     ':admin_resto_id' => $_SESSION['user']['user_id']
                 ));
                 if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
@@ -57,8 +58,8 @@
         }
         //debug($membre_modifie);
     }
-    if (isResto1On()) {
-        $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = 'resto1'");
+    if (isRestoAsnieresOn()) {
+        $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = 'asnieres'");
         $nb_row = $resultat->rowCount();
         if ($nb_row > 0) {
             $contenu .= '<table class="table table-striped">';
@@ -71,6 +72,7 @@
                     <th>Prix promo</th>
                     <th>Action promo</th>
                     <th>Secteur</th>
+                    <th>Type de produit</th>
                     <th>Date d\'enregistrement</th>
                     <th>Admin resto</th>
                     <th>Actions</th>
@@ -111,9 +113,18 @@
             <?php echo $contenu;?>
         </div>
         <div class="insert-product-data">
-            <h4><?php if (isset($produit_modifie)) {
+            <div class="bloc-title">
+                <h4><?php if (isset($produit_modifie)) {
                 echo 'Modification du produit';
-            }else{echo 'Insérer un produit dans la base de donnée';} ?></h4>
+                }else{echo 'Insérer un produit dans la base de donnée';} ?></h4>
+                <?php 
+                    if (isset($produit_modifie)) {
+                       ?>
+                       <a href="<?php echo RACINE_SITE ?>admin">Retour à l'insertion du produit</a>
+                       <?php
+                    }
+                ?>
+            </div>
             <?php echo $message; ?>
             <form action="" method="post" enctype ="multipart/form-data">
                 <div class="left">
@@ -157,6 +168,16 @@
                             <?php
                         }
                     ?>
+                    <div class="mb-3">
+                        <label for="produit_type" class="form-label">Le type de produit</label>
+                        <select name="produit_type" id="produit_type" class="form-select">
+                            <option value="aucun" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'aucun') echo 'selected'; ?>>Aucun</option>
+                            <option value="menu" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu') echo 'selected'; ?>>Menu</option>
+                            <option value="menu-simple" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu-simple') echo 'selected'; ?>>Menu simple</option>
+                            <option value="menu-doublé" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu-doublé') echo 'selected'; ?>>Menu doublé</option>
+                            <option value="boisson" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'boisson') echo 'selected'; ?>>Boisson</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="photo" class="form-label">Photo du produit</label>
                         <input class="form-control" type="file" id="formFile" name = "photo" id="photo">

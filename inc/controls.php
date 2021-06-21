@@ -120,5 +120,54 @@
                 $reponse['success'] = 'Connexion reussit';
                 echo json_encode($reponse);
             }
+        }elseif ($_POST['postType'] == 'homeData') {
+            if ($_POST['secteur'] == 'asnieres') {
+                if ($_POST['produit_type'] == 'aucun') {
+                    $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = :secteur AND produit_type = :produit_type",array(
+                        ':secteur' => $_POST['secteur'],
+                        ':produit_type' => $_POST['produit_type']
+                    ));
+                    while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $reponse['resultat'][] = $single_product;
+                    }
+                    echo json_encode($reponse);
+                }elseif ($_POST['produit_type'] == 'menu') {
+                    $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = :secteur AND produit_type = :produit_type",array(
+                        ':secteur' => $_POST['secteur'],
+                        ':produit_type' => $_POST['produit_type']
+                    ));
+                    while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $reponse['resultat'][] = $single_product;
+                    }
+                    echo json_encode($reponse);
+                }elseif ($_POST['produit_type'] == 'menu-simple') {
+                    $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = :secteur AND produit_type = :produit_type",array(
+                        ':secteur' => $_POST['secteur'],
+                        ':produit_type' => $_POST['produit_type']
+                    ));
+                    while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $reponse['resultat'][] = $single_product;
+                    }
+                    echo json_encode($reponse);
+                }elseif ($_POST['produit_type'] == 'menu-doublé') {
+                    $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = :secteur AND produit_type = :produit_type",array(
+                        ':secteur' => $_POST['secteur'],
+                        ':produit_type' => $_POST['produit_type']
+                    ));
+                    while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $reponse['resultat'][] = $single_product;
+                    }
+                    echo json_encode($reponse);
+                }elseif ($_POST['produit_type'] == 'boisson') {
+                    $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = :secteur AND produit_type = :produit_type",array(
+                        ':secteur' => $_POST['secteur'],
+                        ':produit_type' => $_POST['produit_type']
+                    ));
+                    while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $reponse['resultat'][] = $single_product;
+                    }
+                    echo json_encode($reponse);
+                }
+            }
         }
     }

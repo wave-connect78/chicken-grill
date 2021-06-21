@@ -17,6 +17,7 @@
     
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v11.0&appId=2027066680767202&autoLogAppEvents=1" nonce="nae1fbIF"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <title><?php echo $title; ?></title>
 </head>
 <body>
@@ -46,10 +47,22 @@
                 </div>
             </div>
             <div class="navi-bloc">
-                <div class="logo"><a href="<?php echo RACINE_SITE; ?>"><img src="../photos/logo.png" alt="chicken grill"></a></div>
+                <div class="logo"><a href="<?php echo RACINE_SITE; ?>"><img src="../assets/logo.png" alt="chicken grill"></a></div>
                 <div class="navi-content">
                     <nav>
-                        <a href="#">Nos produits</a>
+                        <a href="<?php 
+                            if (isset($_SESSION['asnieres'])) {
+                                echo RACINE_SITE.'asnieres';
+                            }elseif (isset($_SESSION['argenteuil'])) {
+                                echo RACINE_SITE.'argenteuil';
+                            }elseif (isset($_SESSION['bezons'])) {
+                                echo RACINE_SITE.'bezons';
+                            }elseif (isset($_SESSION['saint-denis'])) {
+                                echo RACINE_SITE.'saint-denis';
+                            }elseif (isset($_SESSION['epinay-seine'])) {
+                                echo RACINE_SITE.'epinay-seine';
+                            }
+                        ?>">Nos produits</a>
                         <a href="#">Devenir franchisé</a>
                         <!--<a href="#">Notre catalogue 
                             <i class="fas fa-sort-down"></i>
@@ -66,7 +79,7 @@
                 </div>
                 <div class="search">
                     <?php 
-                        if (isResto1On()) {
+                        if (isRestoAsnieresOn() || isRestoArgenteuilOn() || isRestoBezonsOn() || isRestoSaintDenisOn() || isRestoEpinaySeineOn()) {
                             ?>
                             <a href="<?php echo RACINE_SITE ?>admin"><i class="fas fa-cogs"></i></a>
                             <?php

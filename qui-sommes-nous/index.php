@@ -18,7 +18,7 @@
             <p>Chicken Grill le vrai goût épicé <br>Tester c’est l’adopter</p>
         </div>
         <div class="img">
-            <img src="../photos/about-us.jpg" alt="Qui sommes-nous">
+            <img src="../assets/about-us.jpg" alt="Qui sommes-nous">
         </div>
     </div>
 </div>
