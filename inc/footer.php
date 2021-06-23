@@ -37,9 +37,9 @@
                 <p>&copy;Copyright <?php echo date('Y'); ?></p>
             </div>
             <div class="payment">
-                <img src="../assets/paypal.png" alt="paypal">
-                <img src="../assets/visa.png" alt="visa card">
-                <img src="../assets/maestro.png" alt="maestro card">
+                <img src="<?php echo RACINE_SITE ?>assets/paypal.png" alt="paypal">
+                <img src="<?php echo RACINE_SITE ?>assets/visa.png" alt="visa card">
+                <img src="<?php echo RACINE_SITE ?>assets/maestro.png" alt="maestro card">
             </div>
         </div>
     </footer>

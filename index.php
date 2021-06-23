@@ -49,7 +49,7 @@
 </style>
 <body>
     <div class="container">
-        <div class="logo"><a href="<?php echo RACINE_SITE ?>"><img src="<?php echo RACINE_SITE ?>photos/logo.png" alt=""></a></div>
+        <div class="logo"><a href="<?php echo RACINE_SITE ?>"><img src="<?php echo RACINE_SITE ?>assets/logo.png" alt=""></a></div>
         <div class="restaurant">
             <div class="restaurant-navi">
                 <a href="<?php echo RACINE_SITE ?>asnieres"><h3>Chicken Grill Asnières</h3><p>104,rue Émile Zola</p><p>92600 Asnières sur seine</p></a>

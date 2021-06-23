@@ -7,10 +7,16 @@
     $url = 'http://localhost/chicken-grill/admin/';
     require_once '../inc/header.php';
 
-    print_r($_POST);
+    //print_r($_POST);
     if (isset($_POST) && !empty($_POST)) {
         if (isset($_POST['photo_modifiee'])) {
             $product_img_url = $_POST['photo_modifiee'];
+            $path = '../'.$product_img_url;
+            if (file_exists ( $path)) {
+                echo unlink($path);
+            }
+            echo unlink($path);
+            //print_r($_FILES);
         }
         if (!empty($_FILES['photo']['name'])) {
             $file_name = uniqid().'_'.$_FILES['photo']['name'];
@@ -25,25 +31,24 @@
                 $promo = $_POST['promo'];
             }
             
-            if (isRestoAsnieresOn()) {
-                executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,product_img_url,prix_promo,promo,resto_secteur,produit_type,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:product_img_url,:prix_promo,:promo,:resto_secteur,:produit_type,NOW(),:admin_resto_id)",array(
-                    ':product_id' => $_POST['product_id'],
-                    ':product_name' => $_POST['product_name'],
-                    ':product_description' => $_POST['description'],
-                    ':prix' => $_POST['prix'],
-                    ':product_img_url' => $product_img_url,
-                    ':prix_promo' => $prix_promo,
-                    ':promo' => $promo,
-                    ':resto_secteur' => 'asnieres',
-                    ':produit_type' => $_POST['produit_type'],
-                    ':admin_resto_id' => $_SESSION['user']['user_id']
-                ));
-                if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
-                    $message = '<div class="info">Le produit a été modifié avec succes <a href="'.$url.'">Insérer d\'autre produit</a></div>';
-                }else {
-                    $message = '<div class="success">Le produit a été inséré avec succes</div>';
-                }
+            executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,stock,product_img_url,prix_promo,promo,produit_type,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:stock,:product_img_url,:prix_promo,:promo,:produit_type,NOW(),:admin_resto_id)",array(
+                ':product_id' => $_POST['product_id'],
+                ':product_name' => $_POST['product_name'],
+                ':product_description' => $_POST['description'],
+                ':prix' => $_POST['prix'],
+                ':stock' => $_POST['stock'],
+                ':product_img_url' => $product_img_url,
+                ':prix_promo' => $prix_promo,
+                ':promo' => $promo,
+                ':produit_type' => $_POST['produit_type'],
+                ':admin_resto_id' => $_SESSION['user']['user_id']
+            ));
+            if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
+                $message = '<div class="info">Le produit a été modifié avec succes <a href="'.$url.'">Insérer d\'autre produit</a></div>';
+            }else {
+                $message = '<div class="success">Le produit a été inséré avec succes</div>';
             }
+            
         }else {
             $message = '<div class="error">Rassurez vous que tous les champs sont remplis et ressayez</div>';
         }
@@ -58,44 +63,44 @@
         }
         //debug($membre_modifie);
     }
-    if (isRestoAsnieresOn()) {
-        $resultat = executeQuery("SELECT * FROM product WHERE resto_secteur = 'asnieres'");
-        $nb_row = $resultat->rowCount();
-        if ($nb_row > 0) {
-            $contenu .= '<table class="table table-striped">';
-            $contenu .= '<tr>
-                    <th>Identifiant du produit</th>
-                    <th>Nom du produit</th>
-                    <th>Desciption du produit</th>
-                    <th>Prix</th>
-                    <th>Photo du produit</th>
-                    <th>Prix promo</th>
-                    <th>Action promo</th>
-                    <th>Secteur</th>
-                    <th>Type de produit</th>
-                    <th>Date d\'enregistrement</th>
-                    <th>Admin resto</th>
-                    <th>Actions</th>
-                </tr>';
-                while ($produit = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $contenu .= '<tr>';
-                    foreach ($produit as $key => $value) {
-                        if ($key == 'product_img_url') {
-                            $contenu .= '<td><img src="../'.$value.'" style="width:80px;"></td>';
-                        }else {
-                            $contenu .= '<td>'.$value.'</td>';
-                        }
+    
+    $resultat = executeQuery("SELECT * FROM product");
+    $nb_row = $resultat->rowCount();
+    if ($nb_row > 0) {
+        $contenu .= '<table class="table table-striped">';
+        $contenu .= '<tr>
+                <th>Identifiant du produit</th>
+                <th>Nom du produit</th>
+                <th>Desciption du produit</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Photo du produit</th>
+                <th>Prix promo</th>
+                <th>Action promo</th>
+                <th>Type de produit</th>
+                <th>Date d\'enregistrement</th>
+                <th>Admin resto</th>
+                <th>Actions</th>
+            </tr>';
+            while ($produit = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $contenu .= '<tr>';
+                foreach ($produit as $key => $value) {
+                    if ($key == 'product_img_url') {
+                        $contenu .= '<td><img src="../'.$value.'" style="width:80px;"></td>';
+                    }else {
+                        $contenu .= '<td>'.$value.'</td>';
                     }
-                    $contenu .= '<td>';
-                        $contenu .= '<a href="?product_id='.$produit['product_id'].'"> <i class="fas fa-cog"></i></a>';
-                        $contenu .= '<a href="?product_id='.$produit['product_id'].'&action=delete" onclick="return confirm(\'Êtes vous certains de vouloir supprimer cette ce produit?\')"> <i class="fas fa-trash-alt"></i></a>';
-                    $contenu .= '</td>';
-                $contenu .= '</tr>';
-                    //debug($membre);
                 }
-                $contenu .= '</table>';
-        }
+                $contenu .= '<td>';
+                    $contenu .= '<a href="?product_id='.$produit['product_id'].'"> <i class="fas fa-cog"></i></a>';
+                    $contenu .= '<a href="?product_id='.$produit['product_id'].'&action=delete" onclick="return confirm(\'Êtes vous certains de vouloir supprimer cette ce produit?\')"> <i class="fas fa-trash-alt"></i></a>';
+                $contenu .= '</td>';
+            $contenu .= '</tr>';
+                //debug($membre);
+            }
+            $contenu .= '</table>';
     }
+    
 ?>
 <div class="product-data">
     <h2>Gestion des produits et reception des commandes</h2>
@@ -169,12 +174,17 @@
                         }
                     ?>
                     <div class="mb-3">
+                        <label for="stock" class="form-label">Stock du produit</label>
+                        <input type="text" class="form-control" id="stock" name="stock" placeholder="stock" value="<?php echo $produit_modifie['stock'] ?? '' ?>">
+                    </div>
+                    <div class="mb-3">
                         <label for="produit_type" class="form-label">Le type de produit</label>
                         <select name="produit_type" id="produit_type" class="form-select">
                             <option value="aucun" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'aucun') echo 'selected'; ?>>Aucun</option>
                             <option value="menu" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu') echo 'selected'; ?>>Menu</option>
                             <option value="menu-simple" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu-simple') echo 'selected'; ?>>Menu simple</option>
                             <option value="menu-doublé" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'menu-doublé') echo 'selected'; ?>>Menu doublé</option>
+                            <option value="déssert" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'déssert') echo 'selected'; ?>>Déssert</option>
                             <option value="boisson" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'boisson') echo 'selected'; ?>>Boisson</option>
                         </select>
                     </div>

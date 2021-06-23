@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="navi-bloc">
-                <div class="logo"><a href="<?php echo RACINE_SITE; ?>"><img src="../assets/logo.png" alt="chicken grill"></a></div>
+                <div class="logo"><a href="<?php echo RACINE_SITE; ?>"><img src="<?php echo RACINE_SITE ?>assets/logo.png" alt="chicken grill"></a></div>
                 <div class="navi-content">
                     <nav>
                         <a href="<?php 
@@ -91,8 +91,17 @@
                             <input type="search" class="form-control" id="search" name="search" placeholder="Rechercher des produits">
                         </div>
                     </div>
-                    <i class="fas fa-shopping-basket"></i>
-                    <a href="<?php RACINE_SITE ?>../auth"><i class="far fa-user"></i></a>
+                    <div class="cart">
+                        <div><?php 
+                            if (isset($_SESSION['cart'])) {
+                                echo count($_SESSION['cart']);
+                            }else {
+                                echo '0';
+                            }
+                        ?></div>
+                        <a href="<?php echo RACINE_SITE ?>cart"><i class="fas fa-shopping-basket"></i></a>
+                    </div>
+                    <a href="<?php echo RACINE_SITE ?>auth"><i class="far fa-user"></i></a>
                 </div>
             </div>
         </div>

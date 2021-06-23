@@ -84,43 +84,64 @@
     $(function(){
         let URL = 'http://localhost/chicken-grill/';
         $(window).on('load',function(){
-            $.post('../inc/controls.php',{postType:'homeData',secteur:'asnieres',produit_type:'aucun'},function(res){
+            $.post('../inc/controls.php',{postType:'homeData',produit_type:'aucun'},function(res){
                 if (res.resultat) {
                     res.resultat.forEach(element => {
-                        $('.single-product-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><p class="card-text">'+element.prix+' €</p><a href="#" class="btn btn-primary">Découvrir le produit</a></div></div>');
+                        if (element.prix_promo != 0) {
+                            $('.single-product-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Découvrir le produit</a></div></div>');
+                        } else {
+                            $('.single-product-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €<p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Découvrir le produit</a></div></div>');
+                        }
+                        //console.log(element.product_img_url);
+                    });
+                }
+            },'json');
+            $.post('../inc/controls.php',{postType:'homeData',produit_type:'menu'},function(res){
+                if (res.resultat) {
+                    res.resultat.forEach(element => {
+                        if (element.prix_promo != 0) {
+                            $('.menu-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        } else {
+                            $('.menu-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        }
+                        
+                        //console.log(element.product_img_url);
+                    });
+                }
+            },'json');
+            $.post('../inc/controls.php',{postType:'homeData',produit_type:'menu-simple'},function(res){
+                if (res.resultat) {
+                    res.resultat.forEach(element => {
+                        if (element.prix_promo != 0) {
+                            $('.menu-simple-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        } else {
+                            $('.menu-simple-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        }
+                        //console.log(element.product_img_url);
+                    });
+                }
+            },'json');
+            $.post('../inc/controls.php',{postType:'homeData',produit_type:'menu-doublé'},function(res){
+                if (res.resultat) {
+                    res.resultat.forEach(element => {
+                        if (element.prix_promo != 0) {
+                            $('.menu-double-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        } else {
+                            $('.menu-double-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
+                        }
                         console.log(element.product_img_url);
                     });
                 }
             },'json');
-            $.post('../inc/controls.php',{postType:'homeData',secteur:'asnieres',produit_type:'menu'},function(res){
+            $.post('../inc/controls.php',{postType:'homeData',produit_type:'boisson'},function(res){
                 if (res.resultat) {
                     res.resultat.forEach(element => {
-                        $('.menu-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><p class="card-text">'+element.prix+' €</p><a href="#" class="btn btn-primary">Decouvrir le menu</a></div></div>');
-                        console.log(element.product_img_url);
-                    });
-                }
-            },'json');
-            $.post('../inc/controls.php',{postType:'homeData',secteur:'asnieres',produit_type:'menu-simple'},function(res){
-                if (res.resultat) {
-                    res.resultat.forEach(element => {
-                        $('.menu-simple-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><p class="card-text">'+element.prix+' €</p><a href="#" class="btn btn-primary">Decouvrir le menu</a></div></div>');
-                        console.log(element.product_img_url);
-                    });
-                }
-            },'json');
-            $.post('../inc/controls.php',{postType:'homeData',secteur:'asnieres',produit_type:'menu-doublé'},function(res){
-                if (res.resultat) {
-                    res.resultat.forEach(element => {
-                        $('.menu-double-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><p class="card-text">'+element.prix+' €</p><a href="#" class="btn btn-primary">Decouvrir le menu</a></div></div>');
-                        console.log(element.product_img_url);
-                    });
-                }
-            },'json');
-            $.post('../inc/controls.php',{postType:'homeData',secteur:'asnieres',produit_type:'boisson'},function(res){
-                if (res.resultat) {
-                    res.resultat.forEach(element => {
-                        $('.boisson-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><p class="card-text">'+element.prix+' €</p><a href="#" class="btn btn-primary">Decouvrir le produit</a></div></div>');
-                        console.log(element.product_img_url);
+                        if (element.prix_promo != 0) {
+                            $('.boisson-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le produit</a></div></div>');
+                        } else {
+                            $('.boisson-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le produit</a></div></div>');
+                        }
+                        //console.log(element.product_img_url);
                     });
                 }
             },'json');
