@@ -38,7 +38,11 @@
                 $contenu .= '<td>'.$_SESSION['cart'][$key]['quantite'].'</td>';
                 $contenu .= '<td>'.$_SESSION['cart'][$key]['commande_mode'].'</td>';
                 $contenu .= '<td>'.$_SESSION['cart'][$key]['product_type'].'</td>';
-                $contenu .= '<td>'.$_SESSION['cart'][$key]['precision'].'</td>';
+                if (!isset($_SESSION['cart'][$key]['precision'])) {
+                    $contenu .= '<td></td>';
+                } else {
+                    $contenu .= '<td>'.$_SESSION['cart'][$key]['precision'].'</td>';
+                }
                 $contenu .= '<td>'.$_SESSION['cart'][$key]['message'].'</td>';
                 if (!isset($_SESSION['cart'][$key]['boisson'])) {
                     $contenu .= '<td></td>';
