@@ -4,9 +4,19 @@
     $product_img_url = '';
     $message = '';
     $contenu = '';
+    $commande = '';
     $url = 'http://localhost/chicken-grill/admin/';
-    require_once '../inc/header.php';
 
+    if (!isRestoAsnieresOn() && !isRestoArgenteuilOn() && !isRestoBezonsOn() && !isRestoSaintDenisOn() && !isRestoEpinaySeineOn()) {
+        if (isset($_SESSION['actuelPage'])) {
+            header('location:'.RACINE_SITE.$_SESSION['actuelPage']);
+            exit;
+        }else {
+            header('location:'.RACINE_SITE);
+            exit;
+        }
+    }
+    require_once '../inc/header.php';
     //print_r($_POST);
     if (isset($_POST) && !empty($_POST)) {
         if (isset($_POST['photo_modifiee'])) {
@@ -99,6 +109,16 @@
                 //debug($membre);
             }
             $contenu .= '</table>';
+    }
+    if (isRestoAsnieresOn()) {
+        
+    }
+
+    function restoData($resto){
+        $resultat = executeQuery("SELECT * FROM commande WHERE resto = :resto",array(
+            ':resto' => $resto
+        ));
+        return $resultat;
     }
     
 ?>
@@ -205,7 +225,20 @@
         </div>
     </div>
     <div class="commande">
-    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Commade Nr.</th>
+                    <th>Nom du commandeur</th>
+                    <th>Commade code</th>
+                    <th>Referentiel de commande</th>
+                    <th>Détail de la commande</th>
+                    <th>Statut de la commande</th>
+                    <th>Date de la commande</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 </div>
 
@@ -226,8 +259,63 @@
                 $('.gestion-product-navi p:last-child').addClass('active');
                 $('.gestion-product-navi p:first-child').removeClass('active');
             }
+            getCommandeData("asnieres","directAccess");
         });
+        setInterval(() => {
+            let check = <?php echo isRestoAsnieresOn(); ?>;
+            if (check) {
+                getCommandeData("asnieres","commande");
+            }
+        }, 20000);
     });
+    function getCommandeData(resto,postType){
+        $.post("../inc/controls.php",{postType:postType,resto:resto},function(res){
+            if (res.resultat) {
+                console.log(res.resultat);
+                let commandeData;
+                for (let index = 0; index < res.resultat.length; index++) {
+                    const element = res.resultat[index];
+                    let commande = element.commande_detail.split(',');
+                    let commandeListe;
+                    for (let index = 0; index < commande.length; index++) {
+                        const el = commande[index].split('-');
+                        console.log(el);
+                        commandeListe += '<ol>';
+                        commandeListe += '<li>Commande</li>';
+                        commandeListe += '<ul>';
+                        commandeListe += '<li>Menu'+(index+1);
+                        for (let index = 0; index < el.length; index++) {
+                            commandeListe += '<ul>';
+                            commandeListe += '<li>'+el[1]+' x '+el[2]+'</li>';
+                            commandeListe += '<li>Type de produit :'+el[3]+'</li>';
+                            commandeListe += '<li>Livraison :'+el[4]+'</li>';
+                            commandeListe += '<li>Boisson :'+el[5]+'</li>';
+                            commandeListe += '<li>Supplément :'+el[6]+'</li>';
+                            commandeListe += '<li>Autre demande :'+el[7]+'</li>';
+                            commandeListe += '</ul>';
+                        }
+                        commandeListe += '</li>';
+                        commandeListe += '</ul>';
+                        commandeListe += '</ol>';
+                    }
+                    commandeData +='<tr>';
+                    commandeData +='<td>'+(index+1)+'</td>';
+                    commandeData +='<td>'+element.nom+'</td>';
+                    commandeData +='<td>'+element.commande_code+'</td>';
+                    commandeData +='<td>'+element.reference_commande+'</td>';
+                    commandeData +='<td>'+commandeListe+'</td>';
+                    commandeData +='<td>'+element.commande_statut+1+'</td>';
+                    commandeData +='<td>'+element.commande_date+'</td>';
+                    
+                    
+                    commandeData +='</tr>';
+                }
+                $('.commande table tbody tr').remove();
+                $('.commande table tbody').append(commandeData);
+            }
+        },'json');
+
+    }
 </script>
 <?php
     require_once '..//inc/footer.php';

@@ -11,11 +11,11 @@
                 $user = $resultat->fetch(PDO::FETCH_ASSOC);
                 if (password_verify($_POST['mdp'],$user['mdp'])) {
                     $_SESSION['user'] = $user;
-                    $reponse['success'] = 'Connexion reussit';
-                    echo json_encode($reponse);
+                    $response['success'] = 'Connexion reussit';
+                    echo json_encode($response);
                 }else{
-                    $reponse['errorMdp'] = "Votre mot de passe est incorrect";
-                    echo json_encode($reponse);
+                    $response['errorMdp'] = "Votre mot de passe est incorrect";
+                    echo json_encode($response);
                 }
             }else{
                 $response['error'] = "Ce compte n'existe pas dans notre base de donnée";
@@ -63,8 +63,8 @@
                     ));
                     $user = $resultat->fetch(PDO::FETCH_ASSOC);
                     $_SESSION['user'] = $user;
-                    $reponse['success'] = 'Connexion reussit';
-                    echo json_encode($reponse);
+                    $response['success'] = 'Connexion reussit';
+                    echo json_encode($response);
                 }
             }else{
                 $resultat = executeQuery("INSERT INTO users (nom,email,mdp,user_google_id,statut,date_enregistrement) VALUES(:nom,:email,:mdp,:user_google_id,:statut,NOW())",array(
@@ -80,8 +80,8 @@
                 ));
                 $user = $resultat->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['user'] = $user;
-                $reponse['success'] = 'Connexion reussit';
-                echo json_encode($reponse);
+                $response['success'] = 'Connexion reussit';
+                echo json_encode($response);
             }
         }elseif ($_POST['postType'] == 'facebookLogin') {
             $resultat = executeQuery("SELECT * FROM users WHERE email = :email AND user_facebook_id = :user_facebook_id",array(
@@ -102,8 +102,8 @@
                     ));
                     $user = $resultat->fetch(PDO::FETCH_ASSOC);
                     $_SESSION['user'] = $user;
-                    $reponse['success'] = 'Connexion reussit';
-                    echo json_encode($reponse);
+                    $response['success'] = 'Connexion reussit';
+                    echo json_encode($response);
                 }
             }else{
                 $resultat = executeQuery("INSERT INTO users (nom,email,mdp,user_facebook_id,statut,date_enregistrement) VALUES(:nom,:email,:mdp,:user_facebook_id,:statut,NOW())",array(
@@ -119,8 +119,8 @@
                 ));
                 $user = $resultat->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['user'] = $user;
-                $reponse['success'] = 'Connexion reussit';
-                echo json_encode($reponse);
+                $response['success'] = 'Connexion reussit';
+                echo json_encode($response);
             }
         }elseif ($_POST['postType'] == 'homeData') {
             
@@ -129,41 +129,41 @@
                     ':produit_type' => $_POST['produit_type']
                 ));
                 while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $reponse['resultat'][] = $single_product;
+                    $response['resultat'][] = $single_product;
                 }
-                echo json_encode($reponse);
+                echo json_encode($response);
             }elseif ($_POST['produit_type'] == 'menu') {
                 $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
                     ':produit_type' => $_POST['produit_type']
                 ));
                 while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $reponse['resultat'][] = $single_product;
+                    $response['resultat'][] = $single_product;
                 }
-                echo json_encode($reponse);
+                echo json_encode($response);
             }elseif ($_POST['produit_type'] == 'menu-simple') {
                 $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
                     ':produit_type' => $_POST['produit_type']
                 ));
                 while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $reponse['resultat'][] = $single_product;
+                    $response['resultat'][] = $single_product;
                 }
-                echo json_encode($reponse);
+                echo json_encode($response);
             }elseif ($_POST['produit_type'] == 'menu-doublé') {
                 $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
                     ':produit_type' => $_POST['produit_type']
                 ));
                 while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $reponse['resultat'][] = $single_product;
+                    $response['resultat'][] = $single_product;
                 }
-                echo json_encode($reponse);
+                echo json_encode($response);
             }elseif ($_POST['produit_type'] == 'boisson') {
                 $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
                     ':produit_type' => $_POST['produit_type']
                 ));
                 while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $reponse['resultat'][] = $single_product;
+                    $response['resultat'][] = $single_product;
                 }
-                echo json_encode($reponse);
+                echo json_encode($response);
             }
             
         }elseif ($_POST['postType'] == 'cart') {
@@ -179,5 +179,41 @@
                 echo json_encode($response);
             }
             
+        }elseif ($_POST['postType'] == 'commande') {
+            $resultat = executeQuery("SELECT u.nom,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
+                ':resto' => $_POST['resto']
+            ));
+            if (isset($_SESSION['rowcount'])) {
+                
+                if ($_SESSION['rowcount'] == $resultat->rowCount()) {
+                    while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $response['resultat'][] = $commande;
+                    }
+                    print_r($response);
+                }elseif ($_SESSION['rowcount'] < $resultat->rowCount()) {
+                    while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $response['resultat'][] = $commande;
+                    }
+                    $_SESSION['rowcount'] = $resultat->rowCount();
+                    echo json_encode($response);
+                }
+            }else {
+                while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                    $response['resultat'][] = $commande;
+                }
+                
+                $_SESSION['rowcount'] = $resultat->rowCount(); 
+                echo json_encode($response);
+            }
+        }elseif ($_POST['postType'] == 'directAccess') {
+            $resultat = executeQuery("SELECT u.nom,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
+                ':resto' => $_POST['resto']
+            ));
+            while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $response['resultat'][] = $commande;
+            }
+            
+            $_SESSION['rowcount'] = $resultat->rowCount(); 
+            echo json_encode($response);
         }
     }

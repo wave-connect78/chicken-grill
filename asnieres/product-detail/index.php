@@ -28,8 +28,8 @@
             <div class="detail-content">
                 <input type="hidden" name="" class="product-id" value="<?php echo $product['product_id']; ?>">
                 <input type="hidden" name="" class="product-type" value="<?php echo $product['produit_type']; ?>">
-                <h2 class="product-name"><?php echo $product['product_name'] ?></h2>
-                <p><?php echo $product['product_description'] ?></p>
+                <h2 class="product-name mb-4"><?php echo $product['product_name'] ?></h2>
+                <p class="mb-3"><?php echo $product['product_description'] ?></p>
                 <p class="prix">Prix : <span><?php 
                     if ($product['prix_promo'] != 0) {
                         echo $product['prix_promo'];
@@ -128,13 +128,104 @@
         </div>
     </div>
     <div class="produit-suggere">
-        <h3>Nous vous suggerons aussi</h3>
+        <h3 class="mb-5 mt-5">Nous vous suggerons aussi</h3>
         <div class="suggestion">
             <?php 
-                if ($product['']) {
-                    # code...
+                if ($product['produit_type'] == 'aucun') {
+                    ?>
+                    <h5 class="mb-4">Choisir aussi une boisson</h5>
+                    <?php
+                    $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
+                        ':produit_type' => 'boisson'
+                    ));
+                    ?>
+                    <div class="card-content">
+                    <?php
+                    while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
+                }elseif ($product['produit_type'] == 'boisson') {
+                    ?>
+                    <h5 class="mb-4">Choisir aussi un produit</h5>
+                    <?php
+                    $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
+                        ':produit_type' => 'aucun'
+                    ));
+                    ?>
+                    <div class="card-content">
+                    <?php
+                    while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
+                }elseif ($product['produit_type'] == 'menu') {
+                    ?>
+                    <h5 class="mb-4">Choisir aussi un complément</h5>
+                    <?php
+                    $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
+                        ':produit_type' => 'menu-simple'
+                    ));
+                    ?>
+                    <div class="card-content">
+                    <?php
+                    while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
+                }elseif ($product['produit_type'] == 'menu-doublé') {
+                    ?>
+                    <h5 class="mb-4">Choisir aussi un complément</h5>
+                    <?php
+                    $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
+                        ':produit_type' => 'menu-simple'
+                    ));
+                    ?>
+                    <div class="card-content">
+                    <?php
+                    while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
+                }elseif ($product['produit_type'] == 'menu-simple') {
+                    ?>
+                    <h5 class="mb-4">Choisir aussi un complément</h5>
+                    <?php
+                    $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
+                        ':produit_type' => 'menu'
+                    ));
+                    ?>
+                    <div class="card-content">
+                    <?php
+                    while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
                 }
             ?>
+            <div class="dessert">
+                <h5 class="mb-4">Nous vous proposons aussi ces desserts</h5>
+            </div>
         </div>
     </div>
 </div>

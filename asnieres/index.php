@@ -7,12 +7,7 @@
 
     require_once '../inc/header.php';
 
-    $_SESSION['asnieres'] = 'asnieres';
-    unset($_SESSION['argenteuil']);
-    unset($_SESSION['bezons']);
-    unset($_SESSION['saint-denis']);
-    unset($_SESSION['epinay-seine']);
-
+    $_SESSION['actuelPage'] = 'asnieres';
 
 ?>
 <div class="asnieres">
@@ -99,7 +94,7 @@
             $.post('../inc/controls.php',{postType:'homeData',produit_type:'menu'},function(res){
                 if (res.resultat) {
                     res.resultat.forEach(element => {
-                        if (element.prix_promo != 0) {
+                        if (element.prix_promo > 0) {
                             $('.menu-content').prepend('<div class="card"><span>promo</span><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p><s>'+element.prix+' €</s></p><p>'+element.prix_promo+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
                         } else {
                             $('.menu-content').prepend('<div class="card"><img src="'+URL+element.product_img_url+'" class="card-img-top" alt="'+element.product_name+'"><div class="card-body"><h5 class="card-title">'+element.product_name+'</h5><div class="card-text"><p>'+element.prix+' €</p></div><a href="product-detail/?access='+element.product_id+'" class="btn btn-primary">Decouvrir le menu</a></div></div>');
