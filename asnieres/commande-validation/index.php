@@ -87,9 +87,9 @@
                     foreach ($_SESSION['cart'] as $key => $value) {
                         //print_r($_SESSION['cart']);
                         if ($key == count($_SESSION['cart'])-1) {
-                            $commande_detail .= $_SESSION['cart'][$key]['product_id'].'-'.$_SESSION['cart'][$key]['product_name'].'-'.$_SESSION['cart'][$key]['quantite'].'-'.$_SESSION['cart'][$key]['product_type'].'-'.$_SESSION['cart'][$key]['commande_mode'].'-'.$_SESSION['cart'][$key]['boisson'].'-'.$_SESSION['cart'][$key]['precision'].'-'.$_SESSION['cart'][$key]['message'];
+                            $commande_detail .= $_SESSION['cart'][$key]['product_id'].'::'.$_SESSION['cart'][$key]['product_name'].'::'.$_SESSION['cart'][$key]['quantite'].'::'.$_SESSION['cart'][$key]['product_type'].'::'.$_SESSION['cart'][$key]['commande_mode'].'::'.$_SESSION['cart'][$key]['boisson'].'::'.$_SESSION['cart'][$key]['precision'].'::'.$_SESSION['cart'][$key]['message'];
                         } else {
-                            $commande_detail .= $_SESSION['cart'][$key]['product_id'].'-'.$_SESSION['cart'][$key]['product_name'].'-'.$_SESSION['cart'][$key]['quantite'].'-'.$_SESSION['cart'][$key]['product_type'].'-'.$_SESSION['cart'][$key]['commande_mode'].'-'.$_SESSION['cart'][$key]['boisson'].'-'.$_SESSION['cart'][$key]['precision'].'-'.$_SESSION['cart'][$key]['message'].',';
+                            $commande_detail .= $_SESSION['cart'][$key]['product_id'].'::'.$_SESSION['cart'][$key]['product_name'].'::'.$_SESSION['cart'][$key]['quantite'].'::'.$_SESSION['cart'][$key]['product_type'].'::'.$_SESSION['cart'][$key]['commande_mode'].'::'.$_SESSION['cart'][$key]['boisson'].'::'.$_SESSION['cart'][$key]['precision'].'::'.$_SESSION['cart'][$key]['message'].'|';
                         }
                     }
                     executeQuery("INSERT INTO commande(reference_id,user_id,commande_code,commande_detail,reference_commande,commande_statut,resto,commande_date) VALUES(:reference_id,:user_id,:commande_code,:commande_detail,:reference_commande,:commande_statut,:resto,NOW())",array(

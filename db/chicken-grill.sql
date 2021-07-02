@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 30 juin 2021 à 17:49
--- Version du serveur : 10.4.19-MariaDB
--- Version de PHP : 8.0.7
+-- Hôte : localhost
+-- Généré le : ven. 02 juil. 2021 à 18:18
+-- Version du serveur :  10.4.18-MariaDB
+-- Version de PHP : 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `chicken-grill`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `adresse`
+--
+
+CREATE TABLE `adresse` (
+  `adresse_id` int(11) NOT NULL,
+  `nom_complet` varchar(300) NOT NULL,
+  `rue` varchar(255) NOT NULL,
+  `ville` varchar(155) NOT NULL,
+  `cp` varchar(5) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,8 +59,8 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`commande_id`, `reference_id`, `user_id`, `commande_code`, `commande_detail`, `reference_commande`, `commande_statut`, `resto`, `commande_date`) VALUES
-(13, 'b552da03e5b82ead4c2fc06eae12048d00b9cfc7', 13, 2861, '13-Poulet plus riz plus boisson-2-menu-À emporter-fanta-normal-,16-Cheese plus frite plus boisson-3-menu-simple-À emporter-fanta-normal-,15-1 cuisse plus riz plus boisson-1-menu-À emporter-fanta-normal-', '2861-equipe_developpement', 'reçu', 'asnieres', '2021-06-30 15:47:58'),
-(14, '9c89df95d81cc110b84e764d243bbddd59f3ecab', 13, 3154, '13-Poulet plus riz plus boisson-2-menu-À emporter-fanta-normal-,16-Cheese plus frite plus boisson-3-menu-simple-À emporter-fanta-normal-,15-1 cuisse plus riz plus boisson-1-menu-À emporter-fanta-normal-', '3154-equipe_developpement', 'reçu', 'asnieres', '2021-06-30 15:50:07');
+(13, 'b552da03e5b82ead4c2fc06eae12048d00b9cfc7', 13, 2861, '13::Poulet plus riz plus boisson::2::menu::À emporter::fanta::normal::|16::Cheese plus frite plus boisson::3::menu-simple::À emporter::fanta::normal::|15::1 cuisse plus riz plus boisson::1::menu::À emporter::fanta::normal::', '2861-equipe_developpement', 'en-cours', 'asnieres', '2021-06-30 15:47:58'),
+(14, '9c89df95d81cc110b84e764d243bbddd59f3ecab', 13, 3154, '13::Poulet plus riz plus boisson::2::menu::À emporter::fanta::normal::|16::Cheese plus frite plus boisson::3::menu-simple::À emporter::fanta::normal::|15::1 cuisse plus riz plus boisson::1::menu::À emporter::fanta::normal::', '3154-equipe_developpement', 'reçu', 'asnieres', '2021-06-30 15:50:07');
 
 -- --------------------------------------------------------
 
@@ -159,14 +174,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `nom`, `email`, `mdp`, `user_google_id`, `user_facebook_id`, `statut`, `date_enregistrement`) VALUES
-(10, 'EQUIPE DEVELOPPEMENT', 'developpement@waveconnect.fr', '$2y$10$gOPyIKakvPvAoqQFrWUtyOO6zvNI4XOB/ptBKUvvWFcWPeqipJ612', NULL, '105900371736594', 'client', '2021-06-22 15:16:54'),
+(10, 'Developpeur Web', 'developpement@waveconnect.fr', '$2y$10$gOPyIKakvPvAoqQFrWUtyOO6zvNI4XOB/ptBKUvvWFcWPeqipJ612', NULL, '105900371736594', 'client', '2021-07-02 10:37:30'),
 (11, 'EQUIPE DEVELOPPEMENT', 'developpement@waveconnect.fr', '$2y$10$DOeP79/ng9Ir1BRDgHNEBuBD.nsHzxy3XQL3RfXvj3k5DAr6Dq.0u', '114139676919264636726', NULL, 'client', '2021-06-22 15:16:54'),
-(13, 'EQUIPE DEVELOPPEMENT', 'developpement@waveconnect.fr', '$2y$10$X1lk6WXRUksGAKhl5ruRoeRZP2B.sTAUF0hXQX3NaaM1u2efPvQa.', '112578999391782868308', NULL, 'client', '2021-06-30 15:50:50'),
+(13, 'EQUIPE DEVELOPPEMENT', 'developpement@waveconnect.fr', '$2y$10$X1lk6WXRUksGAKhl5ruRoeRZP2B.sTAUF0hXQX3NaaM1u2efPvQa.', '112578999391782868308', NULL, 'client', '2021-07-01 17:56:11'),
 (14, 'Daniel', 'daniel@gmail.com', '$2y$10$cBb8M1NW8.PpwTRXl3zIJe68kQfBE9eNbHu7vBQpCykHOvTvXLKk2', NULL, NULL, 'admin-asnieres', '2021-06-22 17:24:38');
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  ADD PRIMARY KEY (`adresse_id`);
 
 --
 -- Index pour la table `commande`
@@ -195,6 +216,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  MODIFY `adresse_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
