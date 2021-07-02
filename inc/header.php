@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-signin-client_id" content="407013073336-f7279jdm7et9ojql6m2p8afcqmd7ramv.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="407013073336-8mh7bsb5jjfr7vm5oet31j5j71opj6vf.apps.googleusercontent.com">
     <meta name="google-signin-scope" content="profile email">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v11.0&appId=2027066680767202&autoLogAppEvents=1" nonce="nae1fbIF"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
@@ -53,7 +52,7 @@
                     <nav>
                         <a href="<?php 
                             if (isset($_SESSION['actuelPage'])) {
-                                echo RACINE_SITE.$_SESSION['actuelPage'];
+                                echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'];
                             }else{
                                 echo RACINE_SITE;
                             }

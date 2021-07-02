@@ -286,6 +286,49 @@ footer .payment img:not(:last-child){
     height: 450px;
     object-fit: cover;
 }
+/*profil*/
+.profil-content{
+    width: 80%;
+    margin: 50px auto;
+}
+.profil-navigation{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 40px;
+}
+.profil-navigation .item{
+    width: 31%;
+    margin-right: 2.33%;
+    padding: 15px 45px;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 5px 2px #FFA91E;
+    margin-bottom: 2.33%;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profil-navigation .item .fas{
+    font-size: 2em;
+    color: #FFA91E;
+    margin-bottom: 8px;
+}
+.profil-navigation .item .fab{
+    font-size: 2em;
+    color: #FFA91E;
+    margin-bottom: 8px;
+}
+.profil .delivrary-adresse,.profil .relise-order, .profil .delivrary-order, .profil .offer{
+    display: none;
+}
+.profil .delivrary-adresse{
+    width: 65%;
+    margin: 0 auto;
+}
 /*backoffice*/
 .product-data h2{
     text-align: center;
@@ -301,7 +344,7 @@ footer .payment img:not(:last-child){
 .product-data .product{
     display: block;
 }
-.product-data .commande{
+.product-data .commandelist{
     display: none;
 }
 .product .insert-product-data{
@@ -326,6 +369,24 @@ footer .payment img:not(:last-child){
 .bloc-title{
     display: flex;
     justify-content: space-between;
+}
+.commandelist{
+    width: 80%;
+    margin: 50px auto;
+}
+.recu,.encour,.livre{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 65px;
+    border-radius: 50%;
+    background-color: green;
+}
+.encour{
+    background-color: orangered;
+}
+.livre{
+    background-color: red;
 }
 /*nos produits*/
 .carousel-item img{
@@ -458,6 +519,7 @@ footer .payment img:not(:last-child){
     width: 50%;
     margin: 55px auto;
 }
+
 /*media query*/
 
 @media (max-width: 1086px) {

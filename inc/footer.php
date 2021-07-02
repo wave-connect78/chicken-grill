@@ -44,5 +44,6 @@
         </div>
     </footer>
     <script src="<?php echo RACINE_SITE ?>inc/js/main.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>
 </html>

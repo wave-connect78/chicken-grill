@@ -7,7 +7,8 @@
 
     require_once '../inc/header.php';
 
-    $_SESSION['actuelPage'] = 'asnieres';
+    $_SESSION['actuelPage']['nom_resto'] = 'asnieres';
+    $_SESSION['actuelPage']['adresse'] = '104 rue Émile Zola 92600 Asnières sur seine';
 
 ?>
 <div class="asnieres">

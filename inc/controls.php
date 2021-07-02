@@ -180,7 +180,7 @@
             }
             
         }elseif ($_POST['postType'] == 'commande') {
-            $resultat = executeQuery("SELECT u.nom,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
+            $resultat = executeQuery("SELECT u.nom,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
                 ':resto' => $_POST['resto']
             ));
             if (isset($_SESSION['rowcount'])) {
@@ -206,7 +206,7 @@
                 echo json_encode($response);
             }
         }elseif ($_POST['postType'] == 'directAccess') {
-            $resultat = executeQuery("SELECT u.nom,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
+            $resultat = executeQuery("SELECT u.nom,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
                 ':resto' => $_POST['resto']
             ));
             while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
@@ -214,6 +214,30 @@
             }
             
             $_SESSION['rowcount'] = $resultat->rowCount(); 
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'commandeStatutUpdate') {
+            executeQuery("UPDATE commande SET commande_statut = :commande_statut WHERE reference_id = :reference_id",array(
+                ':commande_statut' => $_POST['update'],
+                ':reference_id' => $_POST['reference_id']
+            ));
+            $response['resultat'] = 'ok';
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'googleOut') {
+            unset($_SESSION['user']);
+            $response['resultat'] = 'ok';
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'facebookOut') {
+            unset($_SESSION['user']);
+            $response['resultat'] = 'ok';
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'clientCommande') {
+            $resultat = executeQuery("SELECT * FROM commande WHERE user_id = :user_id AND commande_statut =:statut",array(
+                ':user_id' => $_POST['user_id'],
+                ':statut' => 'livré'
+            ));
+            while ($clientCommande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $response['resultat'][] = $clientCommande;
+            }
             echo json_encode($response);
         }
     }

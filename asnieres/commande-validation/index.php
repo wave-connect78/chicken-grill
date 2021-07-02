@@ -17,6 +17,7 @@
     $commande_code = 0;
     $reference_id = '';
     $commande_detail = '';
+    $onLinecommande = false;
 
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $value) {
@@ -109,20 +110,7 @@
                         ':currency' => $paidCurrency,
                         ':resto' => 'asnieres'
                     ));
-                    //unset($_SESSION['cart']);
-                    /*$pdf = new FPDF();
-                    $pdf->AddPage();
-                    $pdf->SetFont('Arial','B',16);
-                    $pdf->Cell(40,10,'Information relative au paiement enregistré',1);
-                    $pdf->Ln(10);
-                    $pdf->Cell(40,10,'Paiement au nom de :'.$_SESSION['user']['nom'],1);
-                    $pdf->Ln(10);
-                    $pdf->Cell(40,10,'Numero de transaction :'.$transactionID,1);
-                    $pdf->Ln(10);
-                    $pdf->Cell(40,10,'Montant de la transaction :'.$paidAmount,1);
-                    $pdf->Ln(10);
-                    $pdf->Cell(40,10,'Statut du payment :'.$payment_status,1);
-                    $pdf->Output('payment.pdf','I');*/
+                    unset($_SESSION['cart']);
                 }
             }
         }
@@ -132,38 +120,28 @@
     
 ?>
 <div class="commande">
-    <?php 
-        if (isset($_GET) && $_GET['paymentMode'] == 'stripe') {
-            ?>
-            <div class="stripe">
-                <h3>Bienvenu au processus de paiement en ligne</h3>
-                <p>Pour éffectuer le paiement en toute sérénité vous aurez besoin de votre numéro de carte, du cvc qui se trouve deriere votre carte et la date d'expiration.</p>
-                <div id="card-errors" class="error mb-4"></div>
-                <form action="" method="post" id="payment">
-                    <div class="mb-3">
-                        <label for="card_number" class="form-label">Numéro de votre carte</label>
-                        <div class="card-number"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cvc" class="form-label">CVC</label>
-                        <div class="cvc"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="card_expiry" class="form-label">Date d'expiration</label>
-                        <div class="expiry"></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Valider le payment</button>
-                </form>
+    <div class="stripe">
+        <h3>Bienvenu au processus de paiement en ligne</h3>
+        <p>Pour éffectuer le paiement en toute sérénité vous aurez besoin de votre numéro de carte, du cvc qui se trouve deriere votre carte et la date d'expiration.</p>
+        <p>Le montant est de <span style="color:green;font-weight:bold"><?php echo $somme.' €' ?></span></p>
+        <div id="card-errors" class="error mb-4"></div>
+        <form action="" method="post" id="payment">
+            <div class="mb-3">
+                <label for="card_number" class="form-label">Numéro de votre carte</label>
+                <div class="card-number"></div>
             </div>
-            <?php
-        }elseif (isset($_GET) && $_GET['paymentMode'] == 'paypal') {
-            ?>
-            <div class="paypal">
-
+            <div class="mb-3">
+                <label for="cvc" class="form-label">CVC</label>
+                <div class="cvc"></div>
             </div>
-            <?php
-        }
-    ?>
+            <div class="mb-3">
+                <label for="card_expiry" class="form-label">Date d'expiration</label>
+                <div class="expiry"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Valider le payment</button>
+        </form>
+    </div>
+       
 </div>
 
 <script>
@@ -187,7 +165,7 @@
             iconColor: '#fa755a'
         }
     };
-    
+
     let cardNumber = elements.create('cardNumber', {style: style});
     cardNumber.mount('.card-number');
 

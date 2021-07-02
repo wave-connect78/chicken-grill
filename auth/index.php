@@ -129,6 +129,9 @@
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             let guid = profile.getId();
+            var idToken=profile.id_token;
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.disconnect();
             $.post('../inc/controls.php',{user_google_id:guid,nom:profile.getName(),email:profile.getEmail(),mdp:'google',postType:'googleLogin'},function(res){
                 //console.log(res);
                 if (res.success) {

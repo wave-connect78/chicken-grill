@@ -66,7 +66,15 @@
         <?php echo $contenu; ?>
         <div class="somme-total">
             <h4>Somme total : <p><?php echo $somme;?> €</p></h4>
-            <a href="" class="btn btn-primary">Valider la commande</a>
+            <?php 
+                if ($somme > 0) {
+                   ?>
+                   <h5>Chosir un mode de paiement</h5>
+                   <a href="<?php echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'] ?>/commande-validation" class="btn btn-primary">Payer en ligne</a>
+                   <button class="btn btn-primary">Payer sur place</button>
+                   <?php
+                }
+            ?>
         </div>
     </div>
 </div>

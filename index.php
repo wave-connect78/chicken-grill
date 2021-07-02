@@ -35,8 +35,8 @@
     }
     .restaurant .restaurant-navi{
         display: flex;
-        flex-direction: column;
-        width: 25%;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .restaurant a{
         padding: 10px 15px;
@@ -45,6 +45,7 @@
         text-decoration: none;
         color: #593207;
         border-radius: 5px;
+        margin-right: 10px
     }
 </style>
 <body>

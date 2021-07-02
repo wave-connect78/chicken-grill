@@ -41,9 +41,29 @@
                 <div class="mb-3">
                     <label for="commande-mode" class="form-label">Mode de commande</label>
                     <select name="commande-mode" id="commande-mode" class="form-select commande-mode">
-                        <option value="À emporter">À emporter</option>
-                        <option value="Sur place">Sur place</option>
-                        <option value="En livraison">En livraison</option>
+                        <?php 
+                        if (isset($_SESSION['cart'])) {
+                            if ($_SESSION['cart'][0]['commande_mode'] == 'Sur place') {
+                                ?>
+                                <option value="Sur place">Sur place</option>
+                                <?php
+                            }elseif($_SESSION['cart'][0]['commande_mode'] == 'À emporter'){
+                                ?>
+                                <option value="À emporter">À emporter</option>
+                                <?php
+                            }else {
+                                ?>
+                                <option value="À emporter">À emporter</option>
+                                <option value="Sur place">Sur place</option>
+                                <?php
+                            }
+                        }else {
+                            ?>
+                            <option value="À emporter">À emporter</option>
+                            <option value="Sur place">Sur place</option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
                 <?php 

@@ -8,7 +8,7 @@
     $url = 'http://localhost/chicken-grill/admin/';
 
     if (!isRestoAsnieresOn() && !isRestoArgenteuilOn() && !isRestoBezonsOn() && !isRestoSaintDenisOn() && !isRestoEpinaySeineOn()) {
-        if (isset($_SESSION['actuelPage'])) {
+        if (isset($_SESSION['actuelPage']['nom_resto'])) {
             header('location:'.RACINE_SITE.$_SESSION['actuelPage']);
             exit;
         }else {
@@ -157,7 +157,7 @@
                         <input type="hidden" name="product_id" value="<?php echo $produit_modifie['product_id'] ?? 0 ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nom du produit</label>
+                        <label for="product_name" class="form-label">Nom du produit</label>
                         <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nom du produit" value="<?php echo $produit_modifie['product_name'] ?? '' ?>">
                     </div>
                     <div class="mb-3">
@@ -165,14 +165,14 @@
                         <textarea name="description" id="description" class="form-control"><?php echo $produit_modifie['product_description'] ?? '' ?></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Prix du produit</label>
+                        <label for="prix" class="form-label">Prix du produit</label>
                         <input type="text" class="form-control" id="prix" name="prix" placeholder="prix" value="<?php echo $produit_modifie['prix'] ?? '' ?>">
                     </div>
                     <?php 
                         if (isset($produit_modifie)) {
                             ?>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Prix promo</label>
+                                <label for="prix_promo" class="form-label">Prix promo</label>
                                 <input type="text" class="form-control" id="prix_promo" name="prix_promo" placeholder="prix de promotion" value="<?php echo $produit_modifie['prix_promo'] ?? '' ?>">
                             </div>
                             <?php
@@ -224,7 +224,7 @@
             </form>
         </div>
     </div>
-    <div class="commande">
+    <div class="commandelist">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -235,6 +235,7 @@
                     <th>Détail de la commande</th>
                     <th>Statut de la commande</th>
                     <th>Date de la commande</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -246,7 +247,7 @@
     $(function(){
         $('.gestion-product').on('click',function(){
             $('.product-data .product').css({display:'block'});
-            $('.product-data .commande').css({display:'none'});
+            $('.product-data .commandelist').css({display:'none'});
             if (!$('.gestion-product-navi p:first-child').hasClass('active')) {
                 $('.gestion-product-navi p:first-child').addClass('active');
                 $('.gestion-product-navi p:last-child').removeClass('active');
@@ -254,7 +255,7 @@
         });
         $('.gestion-commande').on('click',function(){
             $('.product-data .product').css({display:'none'});
-            $('.product-data .commande').css({display:'block'});
+            $('.product-data .commandelist').css({display:'block'});
             if (!$('.gestion-product-navi p:last-child').hasClass('active')) {
                 $('.gestion-product-navi p:last-child').addClass('active');
                 $('.gestion-product-navi p:first-child').removeClass('active');
@@ -267,6 +268,15 @@
                 getCommandeData("asnieres","commande");
             }
         }, 20000);
+
+        $('.commandelist table tbody').on('click','.modifyStatut',function(){
+            let referenceId = $(this).parent().parent().find('input').val();
+            $.post("../inc/controls.php",{postType:'commandeStatutUpdate',reference_id:referenceId,update:'en-cours'},function(res){
+                if (res.resultat == 'ok') {
+                    getCommandeData("asnieres","directAccess");
+                }
+            },'json');
+        });
     });
     function getCommandeData(resto,postType){
         $.post("../inc/controls.php",{postType:postType,resto:resto},function(res){
@@ -275,43 +285,51 @@
                 let commandeData;
                 for (let index = 0; index < res.resultat.length; index++) {
                     const element = res.resultat[index];
-                    let commande = element.commande_detail.split(',');
-                    let commandeListe;
-                    for (let index = 0; index < commande.length; index++) {
-                        const el = commande[index].split('-');
+                    let commande = element.commande_detail.split('|');
+                    let commandeListe ='';
+                    commandeListe += '<ol>';
+                    for (let i = 0; i < commande.length; i++) {
+                        const el = commande[i].split('::');
                         console.log(el);
-                        commandeListe += '<ol>';
-                        commandeListe += '<li>Commande</li>';
+                        commandeListe += '<li>Choix';
                         commandeListe += '<ul>';
-                        commandeListe += '<li>Menu'+(index+1);
-                        for (let index = 0; index < el.length; index++) {
-                            commandeListe += '<ul>';
-                            commandeListe += '<li>'+el[1]+' x '+el[2]+'</li>';
-                            commandeListe += '<li>Type de produit :'+el[3]+'</li>';
-                            commandeListe += '<li>Livraison :'+el[4]+'</li>';
-                            commandeListe += '<li>Boisson :'+el[5]+'</li>';
-                            commandeListe += '<li>Supplément :'+el[6]+'</li>';
-                            commandeListe += '<li>Autre demande :'+el[7]+'</li>';
-                            commandeListe += '</ul>';
-                        }
-                        commandeListe += '</li>';
+                        commandeListe += '<li>'+el[1]+' x '+el[2]+'</li>';
+                        commandeListe += '<li>Type de produit : '+el[3]+'</li>';
+                        commandeListe += '<li>Livraison : '+el[4]+'</li>';
+                        commandeListe += '<li>Boisson : '+el[5]+'</li>';
+                        commandeListe += '<li>Supplément : '+el[6]+'</li>';
+                        commandeListe += '<li>Autre demande : '+el[7]+'</li>';
                         commandeListe += '</ul>';
-                        commandeListe += '</ol>';
+                        commandeListe += '</li>'
                     }
+                    commandeListe += '</ol>';
                     commandeData +='<tr>';
+                    commandeData +='<input type="hidden" value="'+element.reference_id+'">';
                     commandeData +='<td>'+(index+1)+'</td>';
                     commandeData +='<td>'+element.nom+'</td>';
                     commandeData +='<td>'+element.commande_code+'</td>';
                     commandeData +='<td>'+element.reference_commande+'</td>';
-                    commandeData +='<td>'+commandeListe+'</td>';
-                    commandeData +='<td>'+element.commande_statut+1+'</td>';
-                    commandeData +='<td>'+element.commande_date+'</td>';
+                    commandeData +='<td>Commande'+commandeListe+'</td>';
+                    if (element.commande_statut == 'reçu') {
+                        commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="recu"></span></td>';
+                    }else if(element.commande_statut == 'en-cours'){
+                        commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="encour"></span></td>';
+                    }else{
+                        commandeData +='<td style="position:relative;>'+element.commande_statut+' <span class ="livre"></span></td>';
+                    }
                     
+                    commandeData +='<td>'+element.commande_date+'</td>';
+                    if (element.commande_statut == 'reçu') {
+                        commandeData +='<td><button class="btn btn-primary modifyStatut">En cours</button></td>';
+                    } else {
+                        commandeData +='<td></td>';
+                    }
                     
                     commandeData +='</tr>';
+
                 }
-                $('.commande table tbody tr').remove();
-                $('.commande table tbody').append(commandeData);
+                $('.commandelist table tbody tr').remove();
+                $('.commandelist table tbody').append(commandeData);
             }
         },'json');
 
