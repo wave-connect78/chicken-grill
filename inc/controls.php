@@ -123,49 +123,11 @@
                 echo json_encode($response);
             }
         }elseif ($_POST['postType'] == 'homeData') {
-            
-            if ($_POST['produit_type'] == 'aucun') {
-                $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
-                    ':produit_type' => $_POST['produit_type']
-                ));
-                while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $response['resultat'][] = $single_product;
-                }
-                echo json_encode($response);
-            }elseif ($_POST['produit_type'] == 'menu') {
-                $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
-                    ':produit_type' => $_POST['produit_type']
-                ));
-                while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $response['resultat'][] = $single_product;
-                }
-                echo json_encode($response);
-            }elseif ($_POST['produit_type'] == 'menu-simple') {
-                $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
-                    ':produit_type' => $_POST['produit_type']
-                ));
-                while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $response['resultat'][] = $single_product;
-                }
-                echo json_encode($response);
-            }elseif ($_POST['produit_type'] == 'menu-doublé') {
-                $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
-                    ':produit_type' => $_POST['produit_type']
-                ));
-                while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $response['resultat'][] = $single_product;
-                }
-                echo json_encode($response);
-            }elseif ($_POST['produit_type'] == 'boisson') {
-                $resultat = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type",array(
-                    ':produit_type' => $_POST['produit_type']
-                ));
-                while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                    $response['resultat'][] = $single_product;
-                }
-                echo json_encode($response);
+            $resultat = executeQuery("SELECT * FROM product");
+            while ($single_product = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $response['resultat'][] = $single_product;
             }
-            
+            echo json_encode($response);
         }elseif ($_POST['postType'] == 'cart') {
             $i = 0;
             if (!isset($_SESSION['cart'])) {
@@ -180,8 +142,9 @@
             }
             
         }elseif ($_POST['postType'] == 'commande') {
-            $resultat = executeQuery("SELECT u.nom,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
-                ':resto' => $_POST['resto']
+            $resultat = executeQuery("SELECT u.nom,c.prix,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto AND c.commande_statut != :commande_statut",array(
+                ':resto' => $_POST['resto'],
+                ':commande_statut' => 'livré'
             ));
             if (isset($_SESSION['rowcount'])) {
                 
@@ -206,8 +169,9 @@
                 echo json_encode($response);
             }
         }elseif ($_POST['postType'] == 'directAccess') {
-            $resultat = executeQuery("SELECT u.nom,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto",array(
-                ':resto' => $_POST['resto']
+            $resultat = executeQuery("SELECT u.nom,c.prix,c.reference_id,c.commande_code,c.commande_detail,c.reference_commande,c.commande_statut,c.commande_date FROM commande c INNER JOIN users u ON c.user_id = u.user_id WHERE c.resto =:resto AND c.commande_statut != :commande_statut",array(
+                ':resto' => $_POST['resto'],
+                ':commande_statut' => 'livré'
             ));
             while ($commande = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $response['resultat'][] = $commande;
@@ -216,9 +180,9 @@
             $_SESSION['rowcount'] = $resultat->rowCount(); 
             echo json_encode($response);
         }elseif ($_POST['postType'] == 'commandeStatutUpdate') {
-            executeQuery("UPDATE commande SET commande_statut = :commande_statut WHERE reference_id = :reference_id",array(
+            executeQuery("UPDATE commande SET commande_statut = :commande_statut WHERE commande_code = :commande_code",array(
                 ':commande_statut' => $_POST['update'],
-                ':reference_id' => $_POST['reference_id']
+                ':commande_code' => $_POST['code']
             ));
             $response['resultat'] = 'ok';
             echo json_encode($response);
@@ -231,13 +195,28 @@
             $response['resultat'] = 'ok';
             echo json_encode($response);
         }elseif ($_POST['postType'] == 'clientCommande') {
-            $resultat = executeQuery("SELECT * FROM commande WHERE user_id = :user_id AND commande_statut =:statut",array(
-                ':user_id' => $_POST['user_id'],
-                ':statut' => 'livré'
+            $resultat = executeQuery("SELECT * FROM commande WHERE user_id = :user_id",array(
+                ':user_id' => $_POST['user_id']
             ));
             while ($clientCommande = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $response['resultat'][] = $clientCommande;
             }
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'clientOffer') {
+            $resultat = executeQuery("SELECT * FROM product WHERE promo = :promo",array(
+                ':promo' => 'en-promo'
+            ));
+            while ($clientCommande = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $response['resultat'][] = $clientCommande;
+            }
+            echo json_encode($response);
+        }elseif ($_POST['postType'] == 'commandeStatutUpdateLivre') {
+            executeQuery("UPDATE commande SET commande_statut = :commande_statut,commande_code=:commande_code_reset WHERE commande_code = :commande_code",array(
+                ':commande_statut' => $_POST['update'],
+                ':commande_code' => $_POST['code'],
+                ':commande_code_reset' => 1
+            ));
+            $response['resultat'] = 'ok';
             echo json_encode($response);
         }
     }

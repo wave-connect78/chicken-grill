@@ -9,6 +9,20 @@ body{
 p{
     font-size: 1.2em;
 }
+.load{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,.5);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .error{
     border-left: 3px solid rgb(236, 51, 51);
     margin: 10px 0;
@@ -329,6 +343,16 @@ footer .payment img:not(:last-child){
     width: 65%;
     margin: 0 auto;
 }
+.profil .offer .offer-content{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+.profil .offer .offer-content .card{
+    width: 19%;
+    margin-right: 1%;
+}
 /*backoffice*/
 .product-data h2{
     text-align: center;
@@ -374,19 +398,76 @@ footer .payment img:not(:last-child){
     width: 80%;
     margin: 50px auto;
 }
-.recu,.encour,.livre{
+.recu,.preparation,.livre,.fini{
     width: 15px;
     height: 15px;
     position: absolute;
-    left: 65px;
+    left: 106px;
     border-radius: 50%;
     background-color: green;
 }
-.encour{
+.preparation{
     background-color: orangered;
+}
+.fini{
+    background-color: darkgoldenrod;
 }
 .livre{
     background-color: red;
+}
+.commandelist table tbody tr .modifyStatut{
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+.commandelist table tbody tr .finprepa{
+    background-color: orangered;
+    border-color: orangered;
+}
+.commandelist table tbody tr .plivre{
+    background-color: darkgoldenrod;
+    border-color: darkgoldenrod;
+}
+.commandelist .nbcommande{
+    float: right;
+    margin: 0 0 30px;
+}
+.commandelist .nbcommande span{
+    font-size: 1.3em;
+    padding: 11px 18px 15px;
+    background-color: darkgreen;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+}
+/*contact*/
+.contactclient{
+    width: 80%;
+    margin: 50px auto;
+}
+.contactclient .restaurant{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 60px 0;
+}
+.contactclient .restaurant .bloc{
+    width: 23%;
+    box-shadow: 0 0 5px 1px #593207;
+    margin-right: 2%;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 2%;
+}
+.contactclient .fas{
+    color: #FFA91E;
+    margin-right: 5px;
+}
+.contactclient .formcontact{
+    width: 50%;
+    margin: auto;
+}
+.contactclient .formcontact h3{
+    text-align: center;
 }
 /*nos produits*/
 .carousel-item img{
@@ -404,6 +485,9 @@ footer .payment img:not(:last-child){
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+.single-product-content{
+    justify-content: center;
 }
 .single-product-content .card,.menu-content .card,.menu-simple-content .card,.menu-double-content .card,.boisson-content .card{
     margin-bottom: 40px;
@@ -440,6 +524,7 @@ footer .payment img:not(:last-child){
 .detail{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .product-img{
     width: 50%;
@@ -455,9 +540,10 @@ footer .payment img:not(:last-child){
 .map iframe{
     height: 255px;
     margin-bottom: 40px;
+    width: 100%;
 }
 .detail .localisation .prix{
-    color: rgb(236, 51, 51);
+    color: rgb(14, 107, 49);
     font-weight: 600;
     font-size: 1.3em;
 }
@@ -476,6 +562,7 @@ footer .payment img:not(:last-child){
 .card-content{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 .card-content .card{
     margin-bottom: 40px;
@@ -486,6 +573,14 @@ footer .payment img:not(:last-child){
 .panier .panier-content{
     width: 80%;
     margin: 30px auto;
+}
+.panier .byonline{
+    display: block;
+    width: 30%;
+}
+.panier .send-commande{
+    display: none;
+    width: 30%;
 }
 /*payment*/
 .StripeElement {
@@ -503,7 +598,9 @@ footer .payment img:not(:last-child){
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
 }
-  
+.commande .stripe h3{
+    margin-bottom: 30px;
+}
 .StripeElement--focus {
     box-shadow: 0 1px 3px 0 #cfd7df;
 }
@@ -519,7 +616,12 @@ footer .payment img:not(:last-child){
     width: 50%;
     margin: 55px auto;
 }
-
+/*confirmation*/
+.confirmation-content{
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
+}
 /*media query*/
 
 @media (max-width: 1086px) {
@@ -578,6 +680,94 @@ footer .payment img:not(:last-child){
     .single-product-content .card, .menu-content .card, .menu-simple-content .card, .menu-double-content .card, .boisson-content .card{
         width: 24%;
     }
+    .menu-simple-content,.menu-double-content{
+        justify-content: center;
+    }
+    .contactclient .restaurant .bloc{
+        width: 31.33%;
+    }
+    .product-img{
+        width: 100%;
+    }
+    .detail .localisation{
+        width: 100%;
+        margin-top: 35px;
+    }
+    .card-content .card{
+        width: 32.33%;
+    }
+    .card-content{
+        justify-content: center;
+    }
+    .profil .offer .offer-content{
+        justify-content: center;
+    }
+    .profil .offer .offer-content .card{
+        width: 24%;
+        margin-bottom: 2%;
+    }
+}
+@media (max-width: 980px) {
+    .panier-content table,.relise-order table{
+        position: relative;
+        display: block;
+    }
+    .panier-content thead,.panier-content tbody,.panier-content tr,.panier-content th,.panier-content td,.relise-order table thead,.relise-order tbody,.relise-order tr,.relise-order th,.relise-order td{
+        display: block;
+    }
+    .panier-content table tr:nth-child(1),.relise-order table tr:nth-child(1) { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+    .panier-content table tr:not(:nth-child(1)),.relise-order table tr:not(:nth-child(1)){
+        margin-bottom: 30px;
+    }
+    .panier-content table td,.relise-order table td { 
+		/* Behave  like a "row" */ 
+		position: relative;
+		padding-left: 50%;
+        height: 40px;
+	}
+    .relise-order table td{
+        height: auto;
+    }
+    .panier-content table td:before,.relise-order table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+    .panier-content table td:nth-of-type(1):before { content: "Nr."; }
+	.panier-content table td:nth-of-type(2):before { content: "Nom du produit"; }
+	.panier-content table td:nth-of-type(3):before { content: "Prix"; }
+	.panier-content table td:nth-of-type(4):before { content: "Quantité"; }
+	.panier-content table td:nth-of-type(5):before { content: "Mode de commande"; }
+	.panier-content table td:nth-of-type(6):before { content: "Type de produit"; }
+	.panier-content table td:nth-of-type(7):before { content: "Detail sur le produit"; }
+	.panier-content table td:nth-of-type(8):before { content: "Autre envie"; }
+	.panier-content table td:nth-of-type(9):before { content: "Boisson"; }
+	.panier-content table td:nth-of-type(10):before { content: "Actions"; }
+
+    .panier .precision,.panier .send-commande,.panier .byonline{
+        width: 50% !important;
+    }
+    .panier .send-commande button{
+        width: 100%;
+    }
+    .relise-order table td:nth-of-type(1):before { content: "Nr. commande"; }
+	.relise-order table td:nth-of-type(2):before { content: "Detail de la commande"; }
+	.relise-order table td:nth-of-type(3):before { content: "Prix"; }
+	.relise-order table td:nth-of-type(4):before { content: "Statut de la commande"; }
+	.relise-order table td:nth-of-type(5):before { content: "Restaurant"; }
+	.relise-order table td:nth-of-type(6):before { content: "Date de la commande"; }
+    .recu, .preparation, .livre, .fini{
+        left: 370px;
+    }
 }
 @media (max-width: 768px) {
     header .top-navi-content{
@@ -626,6 +816,18 @@ footer .payment img:not(:last-child){
     .single-product-content .card, .menu-content .card, .menu-simple-content .card, .menu-double-content .card, .boisson-content .card{
         width: 32%;
     }
+    .contactclient .restaurant .bloc{
+        width: 48%;
+    }
+    .contactclient .formcontact{
+        width: 70%;
+    }
+    .profil-navigation .item{
+        width: 47.67%;
+    }
+    .profil .offer .offer-content .card{
+        width: 32.33%;
+    }
 }
 @media (max-width: 546px) {
     footer .footer-top{
@@ -652,6 +854,37 @@ footer .payment img:not(:last-child){
     }
     .single-product-content .card, .menu-content .card, .menu-simple-content .card, .menu-double-content .card, .boisson-content .card{
         width: 49%;
+    }
+    .boisson-content{
+        justify-content: center;
+    }
+    .contactclient .restaurant .bloc{
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5%;
+    }
+    .contactclient .formcontact{
+        width: 100%;
+    }
+    .card-content .card{
+        width: 49%;
+    }
+    .panier-content table td {
+        padding-left: 80%;
+    }
+    .commande .stripe {
+        width: 80%;
+    }
+    .profil-navigation .item{
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5%;
+    }
+    .recu, .preparation, .livre, .fini{
+        left: 308px;
+    }
+    .profil .offer .offer-content .card{
+        width: 44%;
     }
 }
 @media (max-width: 472px) {
@@ -680,13 +913,53 @@ footer .payment img:not(:last-child){
     .about-us .text-content{
         padding: 0 10%;
     }
+    .single-product-content .card, .menu-content .card, .menu-simple-content .card, .menu-double-content .card, .boisson-content .card{
+        width: 100%;
+    }
+    .card-content .card{
+        width: 100%;
+        margin-right: 0;
+    }
+    .product-img img{
+        height: 55vh;
+    }
+    .panier .precision,.panier .send-commande,.panier .byonline{
+        width: 100% !important;
+    }
+    .panier-content table td {
+        padding-left: 75%;
+    }
+    .profil-content{
+        width: 100%;
+    }
+    .profil-navigation{
+        width: 80%;
+        margin: 30px auto auto;
+    }
+    .profil-content h3, .profil-content p{
+        margin: auto 10%;
+    }
+    .profil .offer .offer-content .card{
+        width: 100%;
+        margin-right: 0;
+    }
+    .profil .offer{
+        width: 80%;
+        margin: auto auto;
+    }
 }
 @media (max-width: 375px) {
     .auth{
         box-shadow: none;
         width: 100%;
     }
-    .single-product-content .card, .menu-content .card, .menu-simple-content .card, .menu-double-content .card, .boisson-content .card{
-        width: 100%;
+    .product-img img{
+        height: 35vh;
+    }
+    .panier-content table td {
+        padding-left: 67%;
+    }
+    .recu, .preparation, .livre, .fini{
+        left: 283px;
     }
 }

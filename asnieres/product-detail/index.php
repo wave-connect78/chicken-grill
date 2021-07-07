@@ -2,7 +2,8 @@
     require_once '../../inc/init.php';
 
     $title = 'Detaille du produit';
-
+    $email = 'chickengrill.asnieres@gmail.com';
+    $tel = '07 65 45 88 89';
     require_once '../../inc/header.php';
 
     if (isset($_GET) && !empty($_GET)) {
@@ -70,11 +71,12 @@
                     if ($product['produit_type'] != 'boisson') {
                         ?>
                         <div class="mb-3">
-                            <label for="precision" class="form-label">Précision sur la commande</label>
+                            <label for="precision" class="form-label">Quelle sauce souhaitez vous</label>
                             <select name="precision" id="precision" class="form-select precision">
-                                <option value="normal">Normal</option>
-                                <option value="Pas de sel">Pas de sel</option>
-                                <option value="Sonnette en panne">Sonnette en panne</option>
+                                <option value="pas de sauce">Pas de sauce</option>
+                                <option value="sauce1">Sauce 1</option>
+                                <option value="sauce2">Sauce 2</option>
+                                <option value="sauce3">Sauce 3</option>
                             </select>
                         </div>
                         <?php
@@ -86,8 +88,12 @@
                         <div class="mb-3">
                             <label for="choose-boisson" class="form-label">Choisir une boisson</label>
                             <select name="choose-boisson" id="choose-boisson" class="form-select choose-boisson">
-                                <option value="fanta">Fanta</option>
-                                <option value="cola">Cola</option>
+                                <option value="Coca">Coca</option>
+                                <option value="Coca-cherry">Coca cherry</option>
+                                <option value="orangina ">Orangina</option>
+                                <option value="schweppes-agrumes">Schweppes agrumes</option>
+                                <option value="ici-tea">Ici tea</option>
+                                <option value="oasis-tropical">Oasis tropical</option>
                             </select>
                         </div>
                         <?php
@@ -109,8 +115,12 @@
                             <div class="mb-3">
                                 <label for="choose-canette" class="form-label">Choisir une canette</label>
                                 <select name="choose-canette" id="choose-canette" class="form-select choose-boisson">
-                                    <option value="canette-fanta">Canette fanta</option>
-                                    <option value="canette-cola">Canette cola</option>
+                                    <option value="Coca">Coca</option>
+                                    <option value="Coca-cherry">Coca cherry</option>
+                                    <option value="orangina ">Orangina</option>
+                                    <option value="schweppes-agrumes">Schweppes agrumes</option>
+                                    <option value="ici-tea">Ici tea</option>
+                                    <option value="oasis-tropical">Oasis tropical</option>
                                 </select>
                             </div>
                             <?php
@@ -128,13 +138,13 @@
                     }
                 ?>
                 <?php 
-                if ($product['stock'] == 0) {
+                if ($product['stock_statut'] == 'rupture') {
                     echo '<div class="error">Le produit est en rupture de stock</div>';
                 }else {
                     ?>
                     <div class="mb-3">
                         <label for="quantite" class="form-label">Quantité</label>
-                        <input type="number" class="form-control quantite" id="quantite" min="1" max="<?php echo $product['stock'] ?>" placeholder="Définir une quantité">
+                        <input type="number" class="form-control quantite" id="quantite" min="1" placeholder="Définir une quantité">
                     </div>
                     <?php
                 }
@@ -276,7 +286,7 @@
                 //console.log(res);
                     if (res.resultat) {
                         $('.cart div').text(res.resultat);
-                        $('.localisation').append('<div class="success">Le produit a été inséré dans le panier <a href="'+URL+'cart">Accéder au panier</a></div>');
+                        $('.localisation').append('<div class="success">Le produit a été inséré dans le panier <a href="'+URL+'<?php echo $_SESSION['actuelPage']['nom_resto']; ?>'+'/cart">Accéder au panier</a></div>');
                     }
                 },'json');
             }

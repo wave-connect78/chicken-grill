@@ -5,6 +5,8 @@
     $message = '';
     $contenu = '';
     $commande = '';
+    $stockState = '';
+    $nbcommande = 0;
     $url = 'http://localhost/chicken-grill/admin/';
 
     if (!isRestoAsnieresOn() && !isRestoArgenteuilOn() && !isRestoBezonsOn() && !isRestoSaintDenisOn() && !isRestoEpinaySeineOn()) {
@@ -17,50 +19,68 @@
         }
     }
     require_once '../inc/header.php';
-    //print_r($_POST);
+    print_r($_POST);
     if (isset($_POST) && !empty($_POST)) {
-        if (isset($_POST['photo_modifiee'])) {
-            $product_img_url = $_POST['photo_modifiee'];
-            $path = '../'.$product_img_url;
-            if (file_exists ( $path)) {
-                echo unlink($path);
-            }
-            echo unlink($path);
-            //print_r($_FILES);
-        }
-        if (!empty($_FILES['photo']['name'])) {
-            $file_name = uniqid().'_'.$_FILES['photo']['name'];
-            $product_img_url = 'photos/img-product/'.$file_name;
-            copy($_FILES['photo']['tmp_name'],'../'.$product_img_url);
-        }
-        if(!empty($_POST['product_name']) && !empty($_POST['description']) && !empty($_POST['prix']) && !empty($product_img_url)) {
-            $prix_promo = 0.00;
-            $promo = 'hors-promo';
-            if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
-                $prix_promo = $_POST['prix_promo'];
-                $promo = $_POST['promo'];
-            }
-            
-            executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,stock,product_img_url,prix_promo,promo,produit_type,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:stock,:product_img_url,:prix_promo,:promo,:produit_type,NOW(),:admin_resto_id)",array(
-                ':product_id' => $_POST['product_id'],
-                ':product_name' => $_POST['product_name'],
-                ':product_description' => $_POST['description'],
-                ':prix' => $_POST['prix'],
-                ':stock' => $_POST['stock'],
-                ':product_img_url' => $product_img_url,
-                ':prix_promo' => $prix_promo,
-                ':promo' => $promo,
-                ':produit_type' => $_POST['produit_type'],
-                ':admin_resto_id' => $_SESSION['user']['user_id']
+        if (isset($_POST['rupture'])) {
+            executeQuery("UPDATE product SET stock_statut = :stock_statut WHERE product_id = :product_id",array(
+                ':stock_statut' => 'rupture',
+                ':product_id' => $_POST['product_id']
             ));
-            if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
-                $message = '<div class="info">Le produit a été modifié avec succes <a href="'.$url.'">Insérer d\'autre produit</a></div>';
-            }else {
-                $message = '<div class="success">Le produit a été inséré avec succes</div>';
+            $message = '<div class="info">Le produit est maintenant en rupture <a href="'.$url.'">Insérer d\'autre produit</a></div>';
+        }elseif (isset($_POST['stock'])) {
+            executeQuery("UPDATE product SET stock_statut = :stock_statut WHERE product_id = :product_id",array(
+                ':stock_statut' => 'stock',
+                ':product_id' => $_POST['product_id']
+            ));
+            $message = '<div class="info">Le produit est de nouveau en stock <a href="'.$url.'">Insérer d\'autre produit</a></div>';
+        }else{
+            if (isset($_POST['photo_modifiee'])) {
+                if (!empty($_FILES['photo']['name'])) {
+                    $product_img_url = $_POST['photo_modifiee'];
+                    $path = '../'.$product_img_url;
+                    if (file_exists ( $path)) {
+                        echo unlink($path);
+                    }
+                }else{
+                    $product_img_url = $_POST['photo_modifiee'];
+                }
+                //echo unlink($path);
+                //print_r($_FILES);
             }
-            
-        }else {
-            $message = '<div class="error">Rassurez vous que tous les champs sont remplis et ressayez</div>';
+            if (!empty($_FILES['photo']['name'])) {
+                $file_name = uniqid().'_'.$_FILES['photo']['name'];
+                $product_img_url = 'photos/img-product/'.$file_name;
+                copy($_FILES['photo']['tmp_name'],'../'.$product_img_url);
+            }
+            if(!empty($_POST['product_name']) && !empty($_POST['description']) && !empty($_POST['prix']) && !empty($product_img_url)) {
+                $prix_promo = 0.00;
+                $promo = 'hors-promo';
+                if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
+                    $prix_promo = $_POST['prix_promo'];
+                    $promo = $_POST['promo'];
+                }
+                
+                executeQuery("REPLACE INTO product (product_id,product_name,product_description,prix,stock_statut,product_img_url,prix_promo,promo,produit_type,date_enregistrement,admin_resto_id) VALUES (:product_id,:product_name,:product_description,:prix,:stock_statut,:product_img_url,:prix_promo,:promo,:produit_type,NOW(),:admin_resto_id)",array(
+                    ':product_id' => $_POST['product_id'],
+                    ':product_name' => $_POST['product_name'],
+                    ':product_description' => $_POST['description'],
+                    ':prix' => $_POST['prix'],
+                    ':product_img_url' => $product_img_url,
+                    ':prix_promo' => $prix_promo,
+                    ':stock_statut' => 'stock',
+                    ':promo' => $promo,
+                    ':produit_type' => $_POST['produit_type'],
+                    ':admin_resto_id' => $_SESSION['user']['user_id']
+                ));
+                if (isset($_POST['promo']) && isset($_POST['prix_promo'])) {
+                    $message = '<div class="info">Le produit a été modifié avec succes <a href="'.$url.'">Insérer d\'autre produit</a></div>';
+                }else {
+                    $message = '<div class="success">Le produit a été inséré avec succes</div>';
+                }
+                
+            }else {
+                $message = '<div class="error">Rassurez vous que tous les champs sont remplis et ressayez</div>';
+            }
         }
     }
     if (isset($_GET['product_id']) && !empty($_GET['product_id'])) {
@@ -194,10 +214,6 @@
                         }
                     ?>
                     <div class="mb-3">
-                        <label for="stock" class="form-label">Stock du produit</label>
-                        <input type="text" class="form-control" id="stock" name="stock" placeholder="stock" value="<?php echo $produit_modifie['stock'] ?? '' ?>">
-                    </div>
-                    <div class="mb-3">
                         <label for="produit_type" class="form-label">Le type de produit</label>
                         <select name="produit_type" id="produit_type" class="form-select">
                             <option value="aucun" <?php if(isset($produit_modifie) && $produit_modifie['produit_type'] == 'aucun') echo 'selected'; ?>>Aucun</option>
@@ -220,11 +236,30 @@
                     <button type="submit" class="btn btn-primary"><?php if (isset($produit_modifie)) {
                         echo 'Modifier le produit';
                     }else{echo 'Insérer le produit';} ?></button>
+                    <?php 
+                        if (isset($produit_modifie) && $produit_modifie['stock_statut'] == 'stock') {
+                            ?>
+                            <form action="" method="post">
+                                <input type="hidden" name= "product_id" value="<?php echo $produit_modifie['product_id'];?>">
+                                <input type="submit" class="btn btn-primary" value="Mettre le produit en rupture de stock" name="rupture">
+                            </form>
+                            <?php
+                        }
+                        if (isset($produit_modifie) && $produit_modifie['stock_statut'] == 'rupture') {
+                            ?>
+                            <form action="" method="post">
+                                <input type="hidden" name= "product_id" value="<?php echo $produit_modifie['product_id'];?>">
+                                <input type="submit" class="btn btn-primary" value="Réaprovisionner le produit" name="stock">
+                            </form>
+                            <?php
+                        }
+                    ?>
                 </div>
             </form>
         </div>
     </div>
     <div class="commandelist">
+        <div class="nbcommande">Nous avons <span></span> nouvelle commande</div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -233,6 +268,8 @@
                     <th>Commade code</th>
                     <th>Referentiel de commande</th>
                     <th>Détail de la commande</th>
+                    <th>Prix</th>
+                    <th>Mode de paiement</th>
                     <th>Statut de la commande</th>
                     <th>Date de la commande</th>
                     <th>Actions</th>
@@ -260,76 +297,172 @@
                 $('.gestion-product-navi p:last-child').addClass('active');
                 $('.gestion-product-navi p:first-child').removeClass('active');
             }
-            getCommandeData("asnieres","directAccess");
+            if ('<?php echo isRestoAsnieresOn(); ?>') {
+                getCommandeData("asnieres","directAccess");
+            }else if ('<?php echo isRestoArgenteuilOn(); ?>') {
+                getCommandeData("argenteuil","directAccess");
+            }else if('<?php echo isRestoBezonsOn(); ?>'){
+                getCommandeData("bezons","directAccess");
+            }else if ('<?php echo isRestoSaintDenisOn(); ?>') {
+                getCommandeData("saint-denis","directAccess");
+            }else if('<?php echo isRestoEpinaySeineOn(); ?>'){
+                getCommandeData("epinay-seine","directAccess");
+            }
         });
         setInterval(() => {
             let check = <?php echo isRestoAsnieresOn(); ?>;
-            if (check) {
+            //let check = <?php echo isRestoAsnieresOn(); ?>;
+            if ('<?php echo isRestoAsnieresOn(); ?>') {
                 getCommandeData("asnieres","commande");
+            }else if ('<?php echo isRestoArgenteuilOn(); ?>') {
+                getCommandeData("argenteuil","commande");
+            }else if('<?php echo isRestoBezonsOn(); ?>'){
+                getCommandeData("bezons","commande");
+            }else if ('<?php echo isRestoSaintDenisOn(); ?>') {
+                getCommandeData("saint-denis","commande");
+            }else if('<?php echo isRestoEpinaySeineOn(); ?>'){
+                getCommandeData("epinay-seine","commande");
             }
         }, 20000);
 
         $('.commandelist table tbody').on('click','.modifyStatut',function(){
-            let referenceId = $(this).parent().parent().find('input').val();
-            $.post("../inc/controls.php",{postType:'commandeStatutUpdate',reference_id:referenceId,update:'en-cours'},function(res){
+            let code = $(this).parent().parent().find('input').val();
+            $.post("../inc/controls.php",{postType:'commandeStatutUpdate',code:code,update:'en-préparation'},function(res){
                 if (res.resultat == 'ok') {
-                    getCommandeData("asnieres","directAccess");
+                    if ('<?php echo isRestoAsnieresOn(); ?>') {
+                        getCommandeData("asnieres","directAccess");
+                    }else if ('<?php echo isRestoArgenteuilOn(); ?>') {
+                        getCommandeData("argenteuil","directAccess");
+                    }else if('<?php echo isRestoBezonsOn(); ?>'){
+                        getCommandeData("bezons","directAccess");
+                    }else if ('<?php echo isRestoSaintDenisOn(); ?>') {
+                        getCommandeData("saint-denis","directAccess");
+                    }else if('<?php echo isRestoEpinaySeineOn(); ?>'){
+                        getCommandeData("epinay-seine","directAccess");
+                    }
+                }
+            },'json');
+        });
+        $('.commandelist table tbody').on('click','.finprepa',function(){
+            let code = $(this).parent().parent().find('input').val();
+            $.post("../inc/controls.php",{postType:'commandeStatutUpdate',code:code,update:'fini'},function(res){
+                if (res.resultat == 'ok') {
+                    if ('<?php echo isRestoAsnieresOn(); ?>') {
+                        getCommandeData("asnieres","directAccess");
+                    }else if ('<?php echo isRestoArgenteuilOn(); ?>') {
+                        getCommandeData("argenteuil","directAccess");
+                    }else if('<?php echo isRestoBezonsOn(); ?>'){
+                        getCommandeData("bezons","directAccess");
+                    }else if ('<?php echo isRestoSaintDenisOn(); ?>') {
+                        getCommandeData("saint-denis","directAccess");
+                    }else if('<?php echo isRestoEpinaySeineOn(); ?>'){
+                        getCommandeData("epinay-seine","directAccess");
+                    }
+                }
+            },'json');
+        });
+        $('.commandelist table tbody').on('click','.plivre',function(){
+            let code = $(this).parent().parent().find('input').val();
+            $.post("../inc/controls.php",{postType:'commandeStatutUpdateLivre',code:code,update:'livré'},function(res){
+                if (res.resultat == 'ok') {
+                    if ('<?php echo isRestoAsnieresOn(); ?>') {
+                        getCommandeData("asnieres","directAccess");
+                    }else if ('<?php echo isRestoArgenteuilOn(); ?>') {
+                        getCommandeData("argenteuil","directAccess");
+                    }else if('<?php echo isRestoBezonsOn(); ?>'){
+                        getCommandeData("bezons","directAccess");
+                    }else if ('<?php echo isRestoSaintDenisOn(); ?>') {
+                        getCommandeData("saint-denis","directAccess");
+                    }else if('<?php echo isRestoEpinaySeineOn(); ?>'){
+                        getCommandeData("epinay-seine","directAccess");
+                    }
                 }
             },'json');
         });
     });
     function getCommandeData(resto,postType){
+        let count = 0;
         $.post("../inc/controls.php",{postType:postType,resto:resto},function(res){
             if (res.resultat) {
                 console.log(res.resultat);
                 let commandeData;
+                let commandeListe ='';
                 for (let index = 0; index < res.resultat.length; index++) {
                     const element = res.resultat[index];
-                    let commande = element.commande_detail.split('|');
-                    let commandeListe ='';
-                    commandeListe += '<ol>';
-                    for (let i = 0; i < commande.length; i++) {
-                        const el = commande[i].split('::');
-                        console.log(el);
+                    if (element.commande_detail.includes('|')) {
+                        let commande = element.commande_detail.split('|');
+                        commandeListe += '<ol>';
+                        for (let i = 0; i < commande.length; i++) {
+                            const el = commande[i].split('::');
+                            console.log(el);
+                            commandeListe += '<li>Choix';
+                            commandeListe += '<ul>';
+                            commandeListe += '<li>'+el[1]+' x '+el[2]+'</li>';
+                            commandeListe += '<li>Type de produit : '+el[3]+'</li>';
+                            commandeListe += '<li>Livraison : '+el[4]+'</li>';
+                            commandeListe += '<li>Boisson : '+el[5]+'</li>';
+                            commandeListe += '<li>Sauce : '+el[6]+'</li>';
+                            commandeListe += '<li>Autre demande : '+el[7]+'</li>';
+                            commandeListe += '</ul>';
+                            commandeListe += '</li>';
+                        }
+                        commandeListe += '</ol>';
+                    } else {
+                        const el = element.commande_detail.split('::');
+                        commandeListe += '<ol>';
                         commandeListe += '<li>Choix';
                         commandeListe += '<ul>';
                         commandeListe += '<li>'+el[1]+' x '+el[2]+'</li>';
                         commandeListe += '<li>Type de produit : '+el[3]+'</li>';
                         commandeListe += '<li>Livraison : '+el[4]+'</li>';
                         commandeListe += '<li>Boisson : '+el[5]+'</li>';
-                        commandeListe += '<li>Supplément : '+el[6]+'</li>';
+                        commandeListe += '<li>Sauce : '+el[6]+'</li>';
                         commandeListe += '<li>Autre demande : '+el[7]+'</li>';
                         commandeListe += '</ul>';
-                        commandeListe += '</li>'
+                        commandeListe += '</li>';
+                        commandeListe += '</ol>';
                     }
-                    commandeListe += '</ol>';
+                    
                     commandeData +='<tr>';
-                    commandeData +='<input type="hidden" value="'+element.reference_id+'">';
+                    commandeData +='<input type="hidden" value="'+element.commande_code+'">';
                     commandeData +='<td>'+(index+1)+'</td>';
                     commandeData +='<td>'+element.nom+'</td>';
                     commandeData +='<td>'+element.commande_code+'</td>';
-                    commandeData +='<td>'+element.reference_commande+'</td>';
+                    commandeData +='<td style="font-weight:700;">'+element.reference_commande+'</td>';
                     commandeData +='<td>Commande'+commandeListe+'</td>';
+                    commandeData +='<td style="font-weight:700;">'+element.prix+' €</td>';
+                    if (element.reference_id == 'PAIEMENT EN CAISSE') {
+                        commandeData +='<td style="color: darkred; font-weight:700;">'+element.reference_id+'</td>';
+                    } else {
+                        commandeData +='<td style="color: rgb(14, 107, 49); font-weight:700;">PAIEMENT EFFECTUE EN LIGNE</td>';
+                    }
                     if (element.commande_statut == 'reçu') {
+                        count++;
                         commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="recu"></span></td>';
-                    }else if(element.commande_statut == 'en-cours'){
-                        commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="encour"></span></td>';
+                    }else if(element.commande_statut == 'en-préparation'){
+                        commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="preparation"></span></td>';
+                    }else if(element.commande_statut == 'fini'){
+                        commandeData +='<td style="position:relative;">'+element.commande_statut+' <span class ="fini"></span></td>';
                     }else{
                         commandeData +='<td style="position:relative;>'+element.commande_statut+' <span class ="livre"></span></td>';
                     }
                     
                     commandeData +='<td>'+element.commande_date+'</td>';
                     if (element.commande_statut == 'reçu') {
-                        commandeData +='<td><button class="btn btn-primary modifyStatut">En cours</button></td>';
-                    } else {
-                        commandeData +='<td></td>';
+                        commandeData +='<td>Lancer la préparation<br> de la commande<button class="btn btn-primary modifyStatut">Débuter la préparation</button></td>';
+                    } else if (element.commande_statut == 'en-préparation') {
+                        commandeData +='<td>Terminer la préparation<br> de la commande<button class="btn btn-primary finprepa">Terminer la préparation</button></td>';
+                    }else if (element.commande_statut == 'fini') {
+                        commandeData +='<td>Définir la commande<br> comme livré<button class="btn btn-primary plivre">Marquer comme livré</button></td>';
                     }
                     
                     commandeData +='</tr>';
+                    commandeListe = '';
 
                 }
                 $('.commandelist table tbody tr').remove();
                 $('.commandelist table tbody').append(commandeData);
+                $('.commandelist .nbcommande span').text(count);
             }
         },'json');
 

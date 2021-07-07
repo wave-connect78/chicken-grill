@@ -25,9 +25,9 @@
                 <h4>Nous contacter</h4>
                 <div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, vero! Magnam!</p>
-                    <p class="adress"><i class="fas fa-map-marker-alt"></i>Adresse : <span>67 Rue Gabriel Péri </span></p>
-                    <p class="tel"><i class="fas fa-phone-alt"></i>Téléphone : <span>01 71 67 75 41</span></p>
-                    <p class="email"><i class="fas fa-envelope"></i>E-mail : <a href="mailto:test@mail.com">test@mail.com</a></p>
+                    <p class="adress"><i class="fas fa-map-marker-alt"></i>Adresse : <span><?php echo $_SESSION['actuelPage']['adresse']; ?> </span></p>
+                    <p class="tel"><i class="fas fa-phone-alt"></i>Téléphone : <span> <?php echo $tel; ?></span></p>
+                    <p class="email"><i class="fas fa-envelope"></i>E-mail : <a href="mailto:<?php echo $email; ?>"> Chicken grill <?php echo $_SESSION['actuelPage']['nom_resto']; ?></a></p>
                 </div>
             </div>
         </div>

@@ -1,16 +1,18 @@
 <?php
     require_once 'init.php';
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-signin-client_id" content="407013073336-8mh7bsb5jjfr7vm5oet31j5j71opj6vf.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="407013073336-oj51rsv06fj9472i2emvbs3f16vs6u74.apps.googleusercontent.com">
     <meta name="google-signin-scope" content="profile email">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo RACINE_SITE ?>inc/css/style.css">
+    <link rel="stylesheet" href="<?php echo RACINE_SITE ?>inc/css/loading.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,8 +27,8 @@
         <div class="top-navi">
             <div class="top-navi-content">
                 <div class="contact">
-                    <p><i class="fas fa-envelope"></i> Email : <a href="mailto:test@mail.com"> test@mail.com</a></p>
-                    <p><i class="fas fa-phone-alt"></i> Téléphone : <span>01 71 67 75 41</span></p>
+                    <p><i class="fas fa-envelope"></i> Email : <a href="mailto:<?php echo $email ?>"> Chicken grill <?php echo $_SESSION['actuelPage']['nom_resto']; ?></a></p>
+                    <p><i class="fas fa-phone-alt"></i> Téléphone : <span> <?php echo $tel; ?></span></p>
                 </div>
                 <div class="social-media">
                     <a href="#"><i class="fab fa-facebook"></i></a>
@@ -67,8 +69,20 @@
                                 <a href="#">Desserts</a>
                             </div>
                         </a>-->
-                        <a href="<?php echo RACINE_SITE ?>qui-sommes-nous">Qui sommes-nous</a>
-                        <a href="#">Contact</a>
+                        <a href="<?php 
+                            if (isset($_SESSION['actuelPage'])) {
+                                echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'].'/qui-sommes-nous';
+                            } else {
+                                echo RACINE_SITE;
+                            }
+                        ?>">Qui sommes-nous</a>
+                        <a href="<?php 
+                            if (isset($_SESSION['actuelPage'])) {
+                                echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'].'/contact';
+                            } else {
+                                echo RACINE_SITE;
+                            }
+                        ?>">Contact</a>
                     </nav>
                 </div>
                 <div class="search">
@@ -93,9 +107,21 @@
                                 echo '0';
                             }
                         ?></div>
-                        <a href="<?php echo RACINE_SITE ?>cart"><i class="fas fa-shopping-basket"></i></a>
+                        <a href="<?php
+                            if (isset($_SESSION['actuelPage'])) {
+                                echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'].'/cart';
+                            } else {
+                                echo RACINE_SITE;
+                            }
+                        ?>"><i class="fas fa-shopping-basket"></i></a>
                     </div>
-                    <a href="<?php echo RACINE_SITE ?>auth"><i class="far fa-user"></i></a>
+                    <a href="<?php
+                        if (isset($_SESSION['actuelPage'])) {
+                            echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'].'/auth';
+                        } else {
+                            echo RACINE_SITE;
+                        }
+                    ?>"><i class="far fa-user"></i></a>
                 </div>
             </div>
         </div>
