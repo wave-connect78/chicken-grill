@@ -27,7 +27,16 @@
                     <p class="create-account">Créer votre compte</p>
                 </div>
             </form>
-            <p>Vous avez oublié votre mot de passe? <a href="#">Reinitialiser</a></p>
+            <p>Vous avez oublié votre mot de passe? <span style="color:#0d6efd;cursor:pointer;" class="verifyEmail">Reinitialiser</span></p>
+            <div class="renitialisePass">
+                <div class="info"></div>
+                <div class="mb-3 email">
+                    <label for="emailV" class="form-label">Verification de votre email</label><br>
+                    <input type="text" class="form-control" id="emailV" name="emailV" placeholder="name@example.com">
+                    <div class="error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
             <div class="withotherprovider">
                 <div class="line"></div>
                 <p>Se connecter avec</p>
@@ -65,6 +74,27 @@
     <script>
         let URL = 'http://localhost/chicken-grill/'+'<?php echo $_SESSION['actuelPage']['nom_resto']; ?>'+'/profil';
         $(function(){
+            $('.verifyEmail').on('click',function(){
+                $('.renitialisePass').css({display:'block'});
+            });
+            $('.renitialisePass button').on('click',function(){
+                $('.renitialisePass .error p').remove();
+                $('.renitialisePass .info p').remove();
+                if ($('.renitialisePass #emailV').val() != '') {
+                    $.post('../../inc/controls.php',{postType:'renitializePass',emailV:$('.renitialisePass #emailV').val()},function(res){
+                        if (res.resultat == 'emailError') {
+                            $('.renitialisePass .error').append('<p>Votre adresse email n\'est pas correct</p>');
+                            console.log(res.resultat);
+                        }else if(res.resultat == 'noPresent'){
+                            $('.renitialisePass .error').append('<p>Votre adresse email n\'existe pas dans notre base de donnée</p>');
+                        }else{
+                            $('.renitialisePass .info').append('<p>'+res.resultat+'</p>');
+                        }
+                    },'json');
+                } else {
+                    $('.renitialisePass .error').append('<p>Veillez indiquer une Adresse email</p>');
+                }
+            });
             $('.account .create-account').on('click',function(){
                 $('.auth .login').css({display:'none'});
                 $('.auth .sign').css({display:'block'});

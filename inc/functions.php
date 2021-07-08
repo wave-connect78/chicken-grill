@@ -72,3 +72,29 @@
             return false;
         }
     }
+
+    function sendMail($from,$to,$subject,$message,$headers,$check){
+        ini_set( 'display_errors', 1 );
+        error_reporting( E_ALL );
+        if ($check) {
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Créer les en-têtes de courriel
+            $headers .= 'From: '.$from."\r\n".
+            'Reply-To: '.$from."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+        } else {
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/plain; charset=iso-8859-1' . "\r\n";
+
+            $headers .= 'From: '.$from."\r\n".
+            'Reply-To: '.$from."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+        }
+        if (mail($to,$subject,$message, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }

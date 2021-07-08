@@ -279,6 +279,9 @@ footer .payment img:not(:last-child){
 .auth .sign{
     display: none;
 }
+.renitialisePass{
+    display: none;
+}
 /*qui sommes nous*/
 .about-us{
     width: 80%;

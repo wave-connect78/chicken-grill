@@ -4,7 +4,7 @@
             <div class="follow-us">
                 <h4>Suivez nous</h4>
                 <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptas, tenetur eum omnis voluptatem enim!</p>
+                    <p>Vous pouvez nous suivre sur différent reseaux sociaux</p>
                     <div class="social-media">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -18,13 +18,15 @@
                 <h4>Mes services</h4>
                 <div>
                     <p class="print">Imprimer la page</p>
-                    <p><a href="#">Connexion/Inscription</a></p>
+                    <p><a href="">Condition générale de vente</a></p>
+                    <p><a href="">Condition générale d'utilisation</a></p>
+                    <p><a href="<?php echo RACINE_SITE.$_SESSION['actuelPage']['nom_resto'].'/auth'; ?>">Connexion/Inscription</a></p>
                 </div>
             </div>
             <div class="contact-us">
                 <h4>Nous contacter</h4>
                 <div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, vero! Magnam!</p>
+                    <p>Vous pouvez nous contacter grâce à notre adresse mail ou par téléphone</p>
                     <p class="adress"><i class="fas fa-map-marker-alt"></i>Adresse : <span><?php echo $_SESSION['actuelPage']['adresse']; ?> </span></p>
                     <p class="tel"><i class="fas fa-phone-alt"></i>Téléphone : <span> <?php echo $tel; ?></span></p>
                     <p class="email"><i class="fas fa-envelope"></i>E-mail : <a href="mailto:<?php echo $email; ?>"> Chicken grill <?php echo $_SESSION['actuelPage']['nom_resto']; ?></a></p>

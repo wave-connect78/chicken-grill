@@ -218,5 +218,52 @@
             ));
             $response['resultat'] = 'ok';
             echo json_encode($response);
+        }elseif ($_POST['postType'] == 'emailContact') {
+            if (verifyEmail($_POST['email'])) {
+                $from = $_POST['email'];
+                $to = $_POST['destination'];
+                $subject = $_POST['objet'];
+                $message = $_POST['message'];
+                $headers = "De :" . $from;
+                if (sendMail($from,$to,$subject,$message, $headers,false)) {
+                    $response['resultat'] = 'Votre méssage à été envoyé avec sucéss nous vous repondrons dans les plus brefs delais.';
+                    echo json_encode($response);
+                } else {
+                    $response['resultat'] = 'messageError';
+                    echo json_encode($response);
+                }
+            } else {
+                $response['resultat'] = 'emailError';
+                echo json_encode($response);
+            }
+        }elseif ($_POST['postType'] == 'renitializePass') {
+            print_r($_POST);
+            if (verifyEmail($_POST['emailV'])) {
+                $resultat = executeQuery("SELECT * FROM users WHERE email = :email",array(
+                    ':email' => $_POST['emailV']
+                ));
+                if ($resultat->rowCount() == 0) {
+                    $response['resultat'] = 'noPresent';
+                    echo json_encode($response);
+                } else {
+                    $user = $resultat->fetch(PDO::FETCH_ASSOC);
+                    $encrypted_chaine = openssl_encrypt($user['user_id'], "AES-128-ECB" ,'chickengrill');
+                    /*$from = '';
+                    $to = $_POST['emailV'];
+                    $subject = $_POST['objet'];
+                    $message = '<p>Bonjour</p><p>Vous avez demandez le changement de votre mot de passe. Vous n\'avez qu\'a cliquer sur le lien ci-dessous pour modifier votre mot de passe</p><a href="">Modifier le mot de passe</a><p>Cordialement<p><p>Chicken grill</p>';
+                    $headers = "noreply :" . $from;
+                    if (sendMail($from,$to,$subject,$message, $headers,true)) {
+                        $response['resultat'] = 'Votre méssage à été envoyé avec sucéss nous vous repondrons dans les plus brefs delais.';
+                        echo json_encode($response);
+                    } else {
+                        $response['resultat'] = 'messageError';
+                        echo json_encode($response);
+                    }*/
+                }
+            } else {
+                $response['resultat'] = 'emailError';
+                echo json_encode($response);
+            }
         }
     }
