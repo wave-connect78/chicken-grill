@@ -3,17 +3,28 @@
 
     $title = 'Detaille du produit';
     $email = 'chickengrill.bezons@gmail.com';
-    $tel = '07 65 45 88 89';
+    $tel = '01 71 67 75 41';
+    if(!isset($_SESSION['actuelPage'])){
+        header('location:https://chicken-grill.fr/');
+        exit;
+    }
     require_once '../../inc/header.php';
 
     if (isset($_GET) && !empty($_GET)) {
-        $resultat = executeQuery("SELECT * FROM product WHERE product_id = :product_id",array(
+        $resultat = executeQuery("SELECT p.product_id,p.product_name,p.product_description,p.prix,m.stock_statut,m.resto,p.product_img_url,p.prix_promo,p.promo,p.produit_type,p.date_enregistrement FROM product p LEFT JOIN manage_stock m ON p.product_id = m.product_id WHERE p.product_id = :product_id",array(
             ':product_id' => $_GET['access']
         ));
         $product = $resultat->fetch(PDO::FETCH_ASSOC);
-        print_r($product);
+        //print_r($product);
     }
 
+    $resultat = executeQuery('SELECT switch_state FROM switch WHERE resto = :resto',array(
+        ':resto' => 'bezons'    
+    ));
+    
+    if($resultat->rowCount() > 0){
+        $state = $resultat->fetch(PDO::FETCH_ASSOC);
+    }
 
 
 ?>
@@ -23,7 +34,7 @@
     </div>
     <div class="detail">
         <div class="product-img">
-            <img src="<?php echo RACINE_SITE.$product['product_img_url'] ?>" alt="<?php echo $product['product_name'] ?>">
+            <img src="<?php echo RACINE_SITE.'/'.$product['product_img_url'] ?>" alt="<?php echo $product['product_name'] ?>">
         </div>
         <div class="localisation">
             <div class="detail-content">
@@ -33,9 +44,9 @@
                 <p class="mb-3"><?php echo $product['product_description'] ?></p>
                 <p class="prix">Prix : <span><?php 
                     if ($product['prix_promo'] != 0) {
-                        echo $product['prix_promo'];
+                        echo str_replace('.',',',$product['prix_promo']);
                     } else {
-                        echo $product['prix'];
+                        echo str_replace('.',',',$product['prix']);
                     }
                     
                 ?></span> €</p>
@@ -68,15 +79,51 @@
                     </select>
                 </div>
                 <?php 
-                    if ($product['produit_type'] != 'boisson') {
+                    if ($product['produit_type'] != 'boisson' && $product['produit_type'] != 'aucun' && $product['produit_type'] != 'menu') {
                         ?>
                         <div class="mb-3">
-                            <label for="precision" class="form-label">Quelle sauce souhaitez vous</label>
+                            <label for="precision" class="form-label">Quelle sauce pour les frites souhaitez vous</label>
                             <select name="precision" id="precision" class="form-select precision">
                                 <option value="pas de sauce">Pas de sauce</option>
-                                <option value="sauce1">Sauce 1</option>
-                                <option value="sauce2">Sauce 2</option>
-                                <option value="sauce3">Sauce 3</option>
+                                <option value="Ketchup">Ketchup</option>
+                                <option value="Mayonnaise">Mayonnaise</option>
+                                <option value="Moutarde">Moutarde</option>
+                                <option value="Algérienne">Algérienne</option>
+                                <option value="Biggie">Biggie</option>
+                                <option value="Barbecue">Barbecue</option>
+                                <option value="Fish">Fish</option>
+                                <option value="Samouraï">Samouraï</option>
+                                <option value="Blanche">Blanche</option>
+                                <option value="Poivre">Poivre</option>
+                                <option value="Andalouse">Andalouse</option>
+                                <option value="Cheezy">Cheezy</option>
+                            </select>
+                        </div>
+                        <?php
+                    }
+                ?>
+                <?php 
+                    if($product['product_name'] == "Frite"){
+                        ?>
+                        <div class="mb-3">
+                            <label for="frite_or_pommesaute" class="form-label">Frite maison ou pomme sautée</label>
+                            <select name="frite_or_pommesaute" id="frite_or_pommesaute" class="form-select frite">
+                                <option value="Frite maison">Frite maison</option>
+                                <option value="Pomme sautée">Pomme sautée</option>
+                            </select>
+                        </div>
+                        <?php
+                    }
+                ?>
+                <?php 
+                    if($product['product_name'] == "Riz"){
+                        ?>
+                        <div class="mb-3">
+                            <label for="riztai_curry_forestier" class="form-label">Choisissez le riz qui vous convient</label>
+                            <select name="riztai_curry_forestier" id="riztai_curry_forestier" class="form-select riztai_curry_forestier">
+                                <option value="Riz thaï">Riz thaï</option>
+                                <option value="Riz curry">Riz curry</option>
+                                <option value="Riz forestier">Riz forestier</option>
                             </select>
                         </div>
                         <?php
@@ -99,18 +146,23 @@
                         <?php
                     }
                     if( $product['produit_type'] == 'boisson'){
-                        if (str_contains($product['product_name'],'sirop')) {
+                        if ($product['product_name'] == 'Eau + sirop au choix') {
                             ?>
                             <div class="mb-3">
                                 <label for="choose-sirob" class="form-label">Choisir un Sirop</label>
                                 <select name="choose-sirob" id="choose-sirob" class="form-select choose-boisson">
-                                    <option value="sirob1">Sirob1</option>
-                                    <option value="sirob2">Sirob2</option>
-                                    <option value="sirob3">Sirob3</option>
+                                    <option value="Grenadine">Grenadine</option>
+                                    <option value="Melon">Melon</option>
+                                    <option value="Pêche">Pêche</option>
+                                    <option value="Kiwi">Kiwi</option>
+                                    <option value="Menthe">Menthe</option>
+                                    <option value="Citron">Citron</option>
+                                    <option value="Banane">Banane</option>
                                 </select>
                             </div>
                             <?php
-                        }elseif (str_contains($product['product_name'],'Canette')) {
+                        }elseif ($product['product_name'] == 'Canette au choix') {
+                            
                             ?>
                             <div class="mb-3">
                                 <label for="choose-canette" class="form-label">Choisir une canette</label>
@@ -124,13 +176,14 @@
                                 </select>
                             </div>
                             <?php
-                        }elseif (str_contains($product['product_name'],'Bouteille')) {
+                        }elseif ($product['product_name'] == 'Bouteille au choix') {
                             ?>
                             <div class="mb-3">
                                 <label for="choose-bouteille" class="form-label">Choisir une bouteille</label>
                                 <select name="choose-bouteille" id="choose-bouteille" class="form-select choose-boisson">
+                                    <option value="bouteille-cola">Bouteille cola classique</option>
                                     <option value="bouteille-fanta">Bouteille fanta</option>
-                                    <option value="bouteille-cola">Bouteille cola</option>
+                                    <option value="bouteille-cola">Bouteille oasis</option>
                                 </select>
                             </div>
                             <?php
@@ -138,7 +191,7 @@
                     }
                 ?>
                 <?php 
-                if ($product['stock_statut'] == 'rupture') {
+                if ($_SESSION['actuelPage']['nom_resto'] == $product['resto'] && $product['stock_statut'] == 'rupture') {
                     echo '<div class="error">Le produit est en rupture de stock</div>';
                 }else {
                     ?>
@@ -154,7 +207,17 @@
                     <textarea name="envis" id="envis" class="form-control envis"></textarea>
                 </div>
             </div>
-            <div class="add-to-cart">Ajouter au panier</div>
+            <?php 
+                if($state['switch_state'] == 'off'){
+                    ?>
+                    <div class="info">Le restaurant bezons est fermé pour l'instant. Aucune commande n'est possible. Revenez plus tard</div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="add-to-cart">Ajouter au panier</div>
+                    <?php
+                }
+            ?>
         </div>
     </div>
     <div class="produit-suggere">
@@ -173,7 +236,7 @@
                     <?php
                     while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE.'/'.$boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.str_replace('.',',',$boisson['prix']).'€</s></p>'; echo '<p>'.str_replace('.',',',$boisson['prix_promo']). '€</p>';} else {echo '<p>'.str_replace('.',',',$boisson['prix']).'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
                         <?php
                     }
                     ?>
@@ -191,7 +254,7 @@
                     <?php
                     while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE.'/'.$boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.str_replace('.',',',$boisson['prix']).'€</s></p>'; echo '<p>'.str_replace('.',',',$boisson['prix_promo']). '€</p>';} else {echo '<p>'.str_replace('.',',',$boisson['prix']).'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
                         <?php
                     }
                     ?>
@@ -202,14 +265,14 @@
                     <h5 class="mb-4">Choisir aussi un complément</h5>
                     <?php
                     $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
-                        ':produit_type' => 'menu-simple'
+                        ':produit_type' => 'aucun'
                     ));
                     ?>
                     <div class="card-content">
                     <?php
                     while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE.'/'.$boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.str_replace('.',',',$boisson['prix']).'€</s></p>'; echo '<p>'.str_replace('.',',',$boisson['prix_promo']). '€</p>';} else {echo '<p>'.str_replace('.',',',$boisson['prix']).'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
                         <?php
                     }
                     ?>
@@ -220,14 +283,14 @@
                     <h5 class="mb-4">Choisir aussi un complément</h5>
                     <?php
                     $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
-                        ':produit_type' => 'menu-simple'
+                        ':produit_type' => 'aucun'
                     ));
                     ?>
                     <div class="card-content">
                     <?php
                     while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE.'/'.$boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.str_replace('.',',',$boisson['prix']).'€</s></p>'; echo '<p>'.str_replace('.',',',$boisson['prix_promo']). '€</p>';} else {echo '<p>'.str_replace('.',',',$boisson['prix']).'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
                         <?php
                     }
                     ?>
@@ -238,14 +301,14 @@
                     <h5 class="mb-4">Choisir aussi un complément</h5>
                     <?php
                     $result = executeQuery("SELECT * FROM product WHERE produit_type = :produit_type LIMIT 5",array(
-                        ':produit_type' => 'menu'
+                        ':produit_type' => 'aucun'
                     ));
                     ?>
                     <div class="card-content">
                     <?php
                     while ($boisson = $result->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE. $boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.$boisson['prix'].'€</s></p>'; echo '<p>'.$boisson['prix_promo']. '€</p>';} else {echo '<p>'.$boisson['prix'].'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
+                        <div class="card"><?php if($boisson['promo'] == 'en-promo') echo '<span>promo</span>' ?><img src="<?php echo RACINE_SITE.'/'.$boisson['product_img_url'] ?>" class="card-img-top" alt="<?php echo $boisson['product_name'] ?>'"><div class="card-body"><h5 class="card-title"><?php echo $boisson['product_name'] ?></h5><div class="card-text"><?php if($boisson['prix_promo'] > 0) {echo '<p><s>'.str_replace('.',',',$boisson['prix']).'€</s></p>'; echo '<p>'.str_replace('.',',',$boisson['prix_promo']). '€</p>';} else {echo '<p>'.str_replace('.',',',$boisson['prix']).'€</p>';}?><p></div><a href="?access=<?php echo $boisson['product_id'] ?>" class="btn btn-primary">Choisir egalement</a></div></div>
                         <?php
                     }
                     ?>
@@ -253,16 +316,16 @@
                     <?php
                 }
             ?>
-            <div class="dessert">
+            <!--<div class="dessert">
                 <h5 class="mb-4">Nous vous proposons aussi ces desserts</h5>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
 
 <script>
     $(function(){
-        let URL = 'http://localhost/chicken-grill/'+'<?php echo $_SESSION['actuelPage']['nom_resto'] ?>';
+        let URL = 'https://chicken-grill.fr/'+'<?php echo $_SESSION['actuelPage']['nom_resto'] ?>';
         $('.add-to-cart').on('click',function(){
             $('.error').remove();
             $('.success').remove();
@@ -271,22 +334,36 @@
             let chooseBoisson = $('.detail-content .choose-boisson option').filter(':selected').val();
             let message = $('.detail-content .envis').val();
             let product_type = $('.detail-content .product-type').val();
-            let product_name = $('.detail-content .product-name').text();
+            let product_name ='';  
+            if($('.detail-content #riztai_curry_forestier').length){
+                product_name = $('.detail-content #riztai_curry_forestier option').filter(':selected').val();
+            }else if($('.detail-content #frite_or_pommesaute').length){
+                product_name = $('.detail-content #frite_or_pommesaute option').filter(':selected').val();
+            }else{
+                product_name = $('.detail-content .product-name').text();
+            }
             let prix = $('.detail-content .prix span').text();
             let product_id = $('.detail-content .product-id').val();
             let quantite = $('.detail-content .quantite').val();
-            let data = {postType:'cart',product_id:product_id,product_name:product_name,prix:prix,product_type:product_type,commande_mode:commandeMode,precision:precision,boisson:chooseBoisson,message:message,quantite:quantite};
-            console.log(data);
+            let data = {postType:'cart',product_id:product_id,product_name:product_name,prix:prix.replace(',','.'),product_type:product_type,commande_mode:commandeMode,precision:precision,boisson:chooseBoisson,message:message,quantite:quantite};
+            //console.log(data);
             if (quantite == undefined) {
                 $('.localisation').append('<div class="error">Stock en rupture</div>');
             } else if(quantite == ''){
                 $('.localisation').append('<div class="error">Veuillez définir une quantité</div>');
             }else{
+                $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
+                if($('.localisation .success').length){
+                    $(this).remove();
+                }
                 $.post('../../inc/controls.php',data,function(res){
                 //console.log(res);
                     if (res.resultat) {
-                        $('.cart div').text(res.resultat);
-                        $('.localisation').append('<div class="success">Le produit a été inséré dans le panier <a href="'+URL+'/cart">Accéder au panier</a></div>');
+                        setTimeout(() => {
+                            $('.cart div').text(res.resultat);
+                            $('.localisation').append('<div class="success">Le produit a été inséré dans le panier <a href="'+URL+'/cart">Accéder au panier</a></div>');
+                             $('.load').remove();
+                        },1000);
                     }
                 },'json');
             }

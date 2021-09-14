@@ -1,0 +1,73 @@
+.carousel .restoname,.product .img-content-product{
+    overflow:hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0,0,0);
+}
+.carousel .restoname div:first-child,.product .img-content-product div:first-child{
+    font-size: 5em;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 3px 4px black;
+}
+.carousel .restoname div,.product .img-content-product div{
+  display:inline-block;
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+.carousel .restoname div:first-of-type,.product .img-content-product div:first-of-type {    /* For increasing performance 
+                       ID/Class should've been used. 
+                       For a small demo 
+                       it's okaish for now */
+  animation: showup 7s infinite;
+}
+
+.carousel .restoname div:last-of-type,.product .img-content-product div:last-of-type {
+  width:0px;
+  animation: reveal 7s infinite;
+}
+
+.carousel .carousel-caption div:last-of-type h3,.product .img-content-product div:last-of-type h3 {
+  font-size: 3em;
+  margin-left:-355px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    20% {opacity:1;}
+}
+@keyframes slidein {
+    0% { margin-left:-800px; }
+    20% { margin-left:-800px; }
+    35% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0px;}
+    20% {opacity:1;width:0px;}
+    30% {width:100%;}
+    80% {opacity:1;}
+    100% {opacity:0;width:100%;}
+}
+
+.carousel .other h3{
+    white-space: nowrap;
+    overflow: hidden;
+    animation: type 3s steps(60, end);
+    width:100%;
+    margin-bottom: 30px;
+}
+.carousel .other h4{
+    font-size: 3em;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 3px 4px black;
+}
+@keyframes type{ 
+    from { 
+        width: 0; 
+   } 
+}

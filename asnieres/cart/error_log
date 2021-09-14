@@ -1,0 +1,69 @@
+[27-Jul-2021 09:26:43 America/Chicago] PHP Fatal error:  Can't use function return value in write context in /home2/chickill/public_html/asnieres/cart/index.php on line 122
+[27-Jul-2021 09:26:50 America/Chicago] PHP Fatal error:  Can't use function return value in write context in /home2/chickill/public_html/asnieres/cart/index.php on line 122
+[27-Jul-2021 09:27:16 America/Chicago] PHP Fatal error:  Can't use function return value in write context in /home2/chickill/public_html/asnieres/cart/index.php on line 122
+[27-Jul-2021 09:27:42 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:27:48 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:28:29 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:29:03 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:29:39 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:29:43 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:29:59 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:30:48 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:31:41 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:33:29 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:33:56 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:34:14 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home2/chickill/public_html/asnieres/cart/index.php on line 241
+[27-Jul-2021 09:36:06 America/Chicago] PHP Fatal error:  Can't use function return value in write context in /home2/chickill/public_html/asnieres/cart/index.php on line 122
+[27-Jul-2021 09:37:46 America/Chicago] PHP Fatal error:  Can't use function return value in write context in /home2/chickill/public_html/asnieres/cart/index.php on line 123
+[27-Jul-2021 09:46:18 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[28-Jul-2021 03:22:40 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function stdpos() in /home2/chickill/public_html/asnieres/cart/index.php:107
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/cart/index.php(214): floatPrice(7)
+#1 {main}
+  thrown in /home2/chickill/public_html/asnieres/cart/index.php on line 107
+[28-Jul-2021 03:23:05 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function stdpos() in /home2/chickill/public_html/asnieres/cart/index.php:107
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/cart/index.php(214): floatPrice(3.5)
+#1 {main}
+  thrown in /home2/chickill/public_html/asnieres/cart/index.php on line 107
+[28-Jul-2021 03:25:45 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function stdpos() in /home2/chickill/public_html/asnieres/cart/index.php:107
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/cart/index.php(214): floatPrice(3.5)
+#1 {main}
+  thrown in /home2/chickill/public_html/asnieres/cart/index.php on line 107
+[28-Jul-2021 03:25:53 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function stdpos() in /home2/chickill/public_html/asnieres/cart/index.php:107
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/cart/index.php(214): floatPrice(3.5)
+#1 {main}
+  thrown in /home2/chickill/public_html/asnieres/cart/index.php on line 107
+[28-Jul-2021 03:27:56 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function stdpos() in /home2/chickill/public_html/asnieres/cart/index.php:108
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/cart/index.php(216): floatPrice(3.5)
+#1 {main}
+  thrown in /home2/chickill/public_html/asnieres/cart/index.php on line 108
+[28-Jul-2021 04:00:00 America/Chicago] PHP Fatal error:  Cannot redeclare floatPrice() (previously declared in /home2/chickill/public_html/asnieres/cart/index.php:106) in /home2/chickill/public_html/inc/functions.php on line 102
+[28-Jul-2021 04:00:49 America/Chicago] PHP Fatal error:  Cannot redeclare floatPrice() (previously declared in /home2/chickill/public_html/asnieres/cart/index.php:106) in /home2/chickill/public_html/inc/functions.php on line 102
+[06-Aug-2021 06:49:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[06-Aug-2021 06:49:40 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[06-Aug-2021 07:10:29 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[09-Aug-2021 09:28:39 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[17-Aug-2021 07:19:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[17-Aug-2021 07:23:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[23-Aug-2021 08:33:17 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[23-Aug-2021 08:35:14 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[25-Aug-2021 09:49:42 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[28-Aug-2021 12:14:09 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[01-Sep-2021 09:04:20 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[03-Sep-2021 01:42:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[06-Sep-2021 05:26:38 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[06-Sep-2021 06:37:55 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[08-Sep-2021 09:18:05 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[13-Sep-2021 02:58:36 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[13-Sep-2021 03:13:39 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:25:44 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:29:45 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:36:07 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/asnieres/cart/index.php on line 19
+[13-Sep-2021 03:36:07 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:36:19 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:37:51 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:59:37 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147

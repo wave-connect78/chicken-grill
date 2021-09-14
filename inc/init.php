@@ -1,7 +1,5 @@
 <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=chicken-grill',
-    'root', 
-    '', 
+    $pdo = new PDO('mysql:host=localhost;dbname=chickill_chickengrill','chickill_ckgrill', 'chicken.grill', 
     array( 
         PDO::ATTR_ERRMODE => PDO:: ERRMODE_WARNING,
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
@@ -9,7 +7,8 @@
     
     session_start();
 
-    define('RACINE_SITE','/chicken-grill/');
+    //define('RACINE_SITE','/chicken-grill/');
+    define('RACINE_SITE','');
     define('STRIPE_EPINAYSEINE_PUBLIC_KEY','pk_test_51JA9QxGuICezOfcTEBWS6nDD5t89vPM2hmNY5hU8sPmPYDVLyW9yo1hRHwTlzdVlNJssFhOLABCtzwo4pTQkcb6p00yCrLDl83');
     define('STRIPE_EPINAYSEINE_API_KEY','sk_test_51JA9QxGuICezOfcTHShzC9pDoxOtoveHwOzlS6tkugQbTaJtQ7FkOTX44dbZfM6wsplIx4fx2RHKPO8Zf9piK4cz00bQisXMkX');
     define('STRIPE_ARGENTEUIL_PUBLIC_KEY','pk_test_51JA9P7LRaPgbMcHQrY1knKEFZtm9y4RK7EYStsTGOgCpd5Li7QdjdGuM4IAHd0cojd8WS8LBFcZ8svuww9BGJJ7500LOUsE8qx');
@@ -23,4 +22,8 @@
     $title = '';
 
     require_once 'functions.php';
+    
+    Header('Access-Control-Allow-Origin: *'); //for allow any domain, insecure
+    Header('Access-Control-Allow-Headers: *'); //for allow any headers, insecure
+    Header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE'); //method allowed
     

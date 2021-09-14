@@ -1,0 +1,2 @@
+[10-Sep-2021 04:57:10 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 143
+[10-Sep-2021 05:00:35 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 143

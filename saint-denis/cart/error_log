@@ -1,0 +1,9 @@
+[13-Jul-2021 04:33:46 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/saint-denis/cart/index.php:20) in /home2/chickill/public_html/saint-denis/cart/index.php on line 64
+[13-Jul-2021 04:35:50 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/saint-denis/cart/index.php:20) in /home2/chickill/public_html/saint-denis/cart/index.php on line 64
+[03-Aug-2021 09:37:08 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[03-Aug-2021 09:37:24 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[03-Aug-2021 09:40:03 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[04-Aug-2021 06:41:28 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[06-Sep-2021 10:15:33 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[06-Sep-2021 10:15:46 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18
+[06-Sep-2021 23:18:11 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/saint-denis/cart/index.php on line 18

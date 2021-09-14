@@ -79,7 +79,7 @@
 
 <script>
     $(function(){
-        let URL = 'http://localhost/chicken-grill/';
+        let URL = 'https://chicken-grill.fr/';
         $(window).on('load',function(){
             $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
             $.post('../inc/controls.php',{postType:'homeData'},function(res){

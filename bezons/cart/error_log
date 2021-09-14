@@ -1,0 +1,2 @@
+[13-Jul-2021 05:15:35 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/bezons/cart/index.php:20) in /home2/chickill/public_html/bezons/cart/index.php on line 64
+[13-Jul-2021 05:19:41 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/bezons/cart/index.php:20) in /home2/chickill/public_html/bezons/cart/index.php on line 64

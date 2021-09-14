@@ -1,0 +1,1 @@
+[26-Jul-2021 07:32:57 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'product_id' in where clause is ambiguous in /home2/chickill/public_html/inc/functions.php on line 19

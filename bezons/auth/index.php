@@ -1,11 +1,16 @@
 <?php
     require_once '../../inc/init.php';
-    if (isOn()) {
-        header('location:'.RACINE_SITE.'profil');
+    if(!isset($_SESSION['actuelPage'])){
+        header('location:https://chicken-grill.fr');
+        exit;
+    }else{
+        if (isOn()) {
+            header('location:'.RACINE_SITE.'/'.$_SESSION['actuelPage']['nom_resto'].'/profil');
+        }   
     }
     $title = 'Connexion à mon compte';
     $email = 'chickengrill.bezons@gmail.com';
-    $tel = '07 65 45 88 89';
+    $tel = '01 71 67 75 41';
     require_once '../../inc/header.php';
 
 
@@ -28,14 +33,21 @@
                     <p class="create-account">Créer votre compte</p>
                 </div>
             </form>
-            <p>Vous avez oublié votre mot de passe? <a href="#">Reinitialiser</a></p>
+            <p>Vous avez oublié votre mot de passe? <span style="color:#0d6efd;cursor:pointer;" class="verifyEmail">Reinitialiser</span></p>
+            <div class="renitialisePass">
+                <div class="info"></div>
+                <div class="mb-3 email">
+                    <label for="emailV" class="form-label">Verification de votre email</label><br>
+                    <input type="text" class="form-control" id="emailV" name="emailV" placeholder="name@example.com">
+                    <div class="error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
             <div class="withotherprovider">
                 <div class="line"></div>
                 <p>Se connecter avec</p>
-                <!--<button id="gSignIn" class="google"><i class="fab fa-google-plus-g"></i>Google</button><br>-->
                 <div class="g-signin2 google" data-onsuccess="onSignIn" data-theme="light"></div>
                 <button class="facebook" data-scope="email"><i class="fab fa-facebook-f"></i>Facebook</button>
-                <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" perms="email" onlogin="checkLoginState();"></div>-->
                 
             </div>
         </div>
@@ -43,15 +55,19 @@
             <h3 class="mb-5">Créer votre compte</h3>
             <form action="" method="post">
                 <div class="mb-3 nom">
-                    <label for="exampleFormControlInput1" class="form-label">Nom</label>
+                    <label for="exampleFormControlInput1" class="form-label">Nom*</label>
                     <input type="text" class="form-control" id="nom" name="nom" placeholder="nom">
                 </div>
+                <div class="mb-3 tel">
+                    <label for="exampleFormControlInput1" class="form-label">Numéro de téléphone*</label>
+                    <input type="text" class="form-control" id="tel" name="tel" placeholder="Numéro de téléphone">
+                </div>
                 <div class="mb-3 email">
-                    <label for="exampleFormControlInput1" class="form-label">Email adresse</label>
+                    <label for="exampleFormControlInput1" class="form-label">Email adresse*</label>
                     <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
                 </div>
                 <div class="mb-3 mdp">
-                    <label for="exampleFormControlInput1" class="form-label">Mot de passe</label>
+                    <label for="exampleFormControlInput1" class="form-label">Mot de passe*</label>
                     <input type="password" class="form-control" id="mdp" name="mdp" placeholder="name@example.com">
                 </div>
                 <div class="account">
@@ -64,8 +80,29 @@
     
 
     <script>
-        let URL = 'http://localhost/chicken-grill/'+'<?php echo $_SESSION['actuelPage']['nom_resto']; ?>'+'/profil';
+        let URL = 'https://chicken-grill.fr/'+'<?php echo $_SESSION['actuelPage']['nom_resto']; ?>'+'/profil';
         $(function(){
+            $('.verifyEmail').on('click',function(){
+                $('.renitialisePass').css({display:'block'});
+            });
+            $('.renitialisePass button').on('click',function(){
+                $('.renitialisePass .error p').remove();
+                $('.renitialisePass .info p').remove();
+                if ($('.renitialisePass #emailV').val() != '') {
+                    $.post('../../inc/controls.php',{postType:'renitializePass',emailV:$('.renitialisePass #emailV').val()},function(res){
+                        if (res.resultat == 'emailError') {
+                            $('.renitialisePass .error').append('<p>Votre adresse email n\'est pas correct</p>');
+                            console.log(res.resultat);
+                        }else if(res.resultat == 'noPresent'){
+                            $('.renitialisePass .error').append('<p>Votre adresse email n\'existe pas dans notre base de donnée</p>');
+                        }else{
+                            $('.renitialisePass .info').append('<p>'+res.resultat+'</p>');
+                        }
+                    },'json');
+                } else {
+                    $('.renitialisePass .error').append('<p>Veillez indiquer une Adresse email</p>');
+                }
+            });
             $('.account .create-account').on('click',function(){
                 $('.auth .login').css({display:'none'});
                 $('.auth .sign').css({display:'block'});
@@ -84,22 +121,37 @@
                     $('.login .mdp').append('<div class="error">Votre champs est vide</div>');
                 }
                 if ($('.login #email').val() != '' && $('.login #mdp').val() != '') {
+                    $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
                     $.post('../../inc/controls.php',{email:$('.login #email').val(),mdp:$('.login #mdp').val(),postType:"login"},function(res){
-                        if (res.errorMdp) {
-                            $('.login .mdp').append('<div class="error">'+res.errorMdp+'</div>'); 
-                        }
-                        if (res.error) {
-                            $('.login').prepend('<div class="error">'+res.error+'</div>');
-                        }
-                        if (res.success) {
-                            window.location.href = URL;
-                        }
+                        setTimeout(() => {
+                            if (res.errorMdp) {
+                                $('.login .mdp').append('<div class="error">'+res.errorMdp+'</div>');
+                                $('.load').remove();
+                            }
+                            if (res.errorVerifyEmail) {
+                                $('.login').prepend('<div class="error">'+res.errorVerifyEmail+'</div>');
+                                $('.load').remove();
+                            }
+                            if (res.error) {
+                                $('.login').prepend('<div class="error">'+res.error+'</div>');
+                                $('.load').remove();
+                            }
+                            if (res.errorMail) {
+                                $('.login').prepend('<div class="error">'+res.error+'</div>');
+                                $('.load').remove();
+                            }
+                            if (res.success) {
+                                window.location.href = URL;
+                            }
+                            $('.load').remove();
+                        }, 3000);
                         //console.log(res);
                     },'json');
                 }
             });
             $('.sign form').on('submit',function(e){
                 e.preventDefault();
+                $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
                 $('.sign .error').remove();
                 $('.sign .success').remove();
                 if ($('.sign #nom').val() == '') {
@@ -111,15 +163,24 @@
                 if ($('.sign #mdp').val() == '') {
                     $('.sign .mdp').append('<div class="error">Votre champs est vide</div>');
                 }
-                if ($('.sign #nom').val() != '' && $('.sign #email').val() != '' && $('.sign #mdp').val() != '') {
-                    $.post('../../inc/controls.php',{nom:$('.sign #nom').val(),email:$('.sign #email').val(),mdp:$('.sign #mdp').val(),postType:"sign"},function(res){
-                        console.log(res);
-                        if (res.errorEmail) {
-                            $('.sign .email').append('<div class="error">'+res.errorEmail+'</div>');
-                        }
-                        if (res.success) {
-                            $('.sign').prepend('<div class="success">'+res.success+'</div>');
-                        }
+                if ($('.sign #tel').val() == '') {
+                    $('.sign .tel').append('<div class="error">Votre champs est vide</div>');
+                }
+                if ($('.sign #nom').val() != '' && $('.sign #email').val() != '' && $('.sign #mdp').val() != '' && $('.sign #tel')) {
+                    $.post('../../inc/controls.php',{nom:$('.sign #nom').val(),email:$('.sign #email').val(),mdp:$('.sign #mdp').val(),tel:$('.sign #tel').val(),postType:"sign"},function(res){
+                        setTimeout(() => {
+                            if (res.errorEmail) {
+                                $('.sign .email').append('<div class="error">'+res.errorEmail+'</div>');
+                            }
+                            if (res.success) {
+                                $('.sign').prepend('<div class="success">'+res.success+'</div>');
+                                $('.sign #nom').val('');
+                                $('.sign #email').val('');
+                                $('.sign #mdp').val('');
+                                $('.sign #tel').val('');
+                            }
+                            $('.load').remove();
+                        },3000);
                     },'json');
                 }
             });
@@ -134,9 +195,12 @@
             var idToken=profile.id_token;
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.disconnect();
+            console.log('test0');
             $.post('../../inc/controls.php',{user_google_id:guid,nom:profile.getName(),email:profile.getEmail(),mdp:'google',postType:'googleLogin'},function(res){
                 //console.log(res);
+                console.log('test1');
                 if (res.success) {
+                    console.log('test2');
                     window.location.href = URL;
                 }
             },'json');

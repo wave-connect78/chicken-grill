@@ -1,0 +1,111 @@
+[19-Jul-2021 09:34:06 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:111
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 111
+[24-Jul-2021 05:37:22 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 05:47:00 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'product_id' in where clause is ambiguous in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 07:59:00 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 08:03:58 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 08:06:37 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 08:10:25 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 08:10:36 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[26-Jul-2021 08:11:09 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:19:15 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:20:08 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:20:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:22:12 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:24:02 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:24:36 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:25:19 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:26:26 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:142
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 142
+[27-Jul-2021 03:26:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:27:47 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:28:06 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:28:24 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:29:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:30:56 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:31:40 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:32:28 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:33:24 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[27-Jul-2021 03:34:51 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/asnieres/product-detail/index.php:143
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/asnieres/product-detail/index.php on line 143
+[13-Sep-2021 03:13:22 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:25:00 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:29:28 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:35:56 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:36:13 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:59:19 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147

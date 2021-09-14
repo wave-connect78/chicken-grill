@@ -1,0 +1,1 @@
+[13-Jul-2021 10:48:25 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/reset-password/index.php:12) in /home2/chickill/public_html/reset-password/index.php on line 18

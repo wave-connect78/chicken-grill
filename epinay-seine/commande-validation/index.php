@@ -1,16 +1,18 @@
 <?php
     require_once '../../inc/init.php';
 
-    if (!isOn()) {
-        header('location:../../auth');
+    if(!isset($_SESSION['actuelPage'])){
+        header('location:https://chicken-grill.fr/');
+        exit;
+    }else{
+        if (!isOn()) {
+            header('location:/'.$_SESSION['actuelPage']['nom_resto'].'/auth');
+        }
     }
-
     $title = 'Validation de la commande';
     $email = 'chickengrill.93800@gmail.com';
-    $tel = '07 65 45 88 89';
+    $tel = '09 53 36 02 17';
     require_once '../../inc/stripe-php/init.php';
-
-    require_once '../../inc/fpdf/fpdf.php';
 
     \Stripe\Stripe::setApiKey(STRIPE_EPINAYSEINE_API_KEY);
 
@@ -21,12 +23,16 @@
     $onLinecommande = false;
 
     if (isset($_SESSION['cart'])) {
-        foreach ($_SESSION['cart'] as $key => $value) {
+        if(isset($_SESSION['sale_price'])){
+            $somme = $_SESSION['sale_price'];
+        }else{
+           foreach ($_SESSION['cart'] as $key => $value) {
             //print_r($_SESSION['cart']);
-            $somme = intval($_SESSION['cart'][$key]['quantite']) * floatval($_SESSION['cart'][$key]['prix']) + $somme;
+                $somme = intval($_SESSION['cart'][$key]['quantite']) * floatval($_SESSION['cart'][$key]['prix']) + $somme;
+            } 
         }
     }else {
-        header('location:'.RACINE_SITE.$_SESSION['actuelPage']['nom_resto']);
+        header('location:'.RACINE_SITE.'/'.$_SESSION['actuelPage']['nom_resto']);
     }
 
     /*if ($somme <= 0) {
@@ -85,34 +91,25 @@
                         } 
                         
                     }
-                    executeQuery("INSERT INTO commande(reference_id,user_id,commande_code,commande_detail,reference_commande,commande_statut,prix,resto,commande_date) VALUES(:reference_id,:user_id,:commande_code,:commande_detail,:reference_commande,:commande_statut,:prix,:resto,NOW())",array(
-                        ':reference_id' => $transactionID,
-                        ':user_id' => $_SESSION['user']['user_id'],
-                        ':commande_code' => $commande_code,
-                        ':commande_detail' => $commande_detail,
-                        ':reference_commande' => $commande_code.'-'.strtolower(str_replace(" ","_",$_SESSION['user']['nom'])),
-                        ':commande_statut' => 'reçu',
-                        ':prix' => $somme,
-                        ':resto' => $_SESSION['actuelPage']['nom_resto']
-                    ));
-                    executeQuery("INSERT INTO payment(user_id,transaction_id,reference_id,amount,payment_statut,currency,resto,create_date) VALUES(:user_id,:transaction_id,:reference_id,:amount,:payment_statut,:currency,:resto,NOW())",array(
-                        ':user_id' => $_SESSION['user']['user_id'],
-                        ':transaction_id' => $transactionID,
-                        ':reference_id' => $transactionID,
-                        ':amount' => $paidAmount,
-                        ':payment_statut' => $payment_status,
-                        ':currency' => $paidCurrency,
-                        ':resto' => $_SESSION['actuelPage']['nom_resto']
-                    ));
-                    $_SESSION['confirmation']['transaction_id'] = $transactionID;
-                    $_SESSION['confirmation']['reference_id'] = 'payment';
-                    $_SESSION['confirmation']['commande_code'] = $commande_code;
-                    $_SESSION['confirmation']['prix'] = $somme;
-                    $_SESSION['confirmation']['reference_commande'] = $commande_code.'-'.strtolower(str_replace(" ","_",$_SESSION['user']['nom']));
-                    $_SESSION['confirmation']['resto'] = $_SESSION['actuelPage']['adresse'];
-                    unset($_SESSION['cart']);
-                    header('location:../confirmation');
-                    exit;
+                    if(isset($_SESSION['sale_price'])){
+                        if(isset($_SESSION['codepromo_update'])){
+                            executeQuery("UPDATE manage_code_promo SET nb = :nb WHERE code_name =:code_name AND user_id =:user_id",array(
+                                    ':nb' => intval($_SESSION['user_promo_nb']) +1,
+                                    ':code_name' => $_SESSION['code_name'],
+                                    ':user_id' => $_SESSION['user']['user_id']
+                                ));
+                                insertCommandeAndValidatePayment($transactionID,$commande_code,$commande_detail,$somme,$paidAmount,$payment_status,$paidCurrency,'Epinay-seine',$tel,$email);
+                        }else{
+                            executeQuery("INSERT INTO manage_code_promo (user_id,nb,code_name) VALUES(:user_id,:nb,:code_name)",array(
+                                    ':user_id' => $_SESSION['user']['user_id'],
+                                    ':nb' => 1,
+                                    ':code_name' => $_SESSION['code_name']
+                                ));
+                            insertCommandeAndValidatePayment($transactionID,$commande_code,$commande_detail,$somme,$paidAmount,$payment_status,$paidCurrency,'Epinay-seine',$tel,$email);
+                        }
+                    }else{
+                        insertCommandeAndValidatePayment($transactionID,$commande_code,$commande_detail,$somme,$paidAmount,$payment_status,$paidCurrency,'Epinay-seine',$tel,$email);
+                    }
                 }
             }
         }
@@ -124,8 +121,8 @@
 <div class="commande">
     <div class="stripe">
         <h3>Bienvenu au processus de paiement en ligne</h3>
-        <p>Pour éffectuer le paiement en toute sérénité vous aurez besoin de votre numéro de carte, du cvc qui se trouve deriere votre carte et la date d'expiration.</p>
-        <p>Le montant est de <span style="color: rgb(14, 107, 49);font-weight:bold"><?php echo $somme.' €' ?></span></p>
+        <p>Pour éffectuer le paiement en toute sérénité vous aurez besoin de votre numéro de carte, du code de vérification de la carte (CVC) qui se trouve derrière votre carte et la date d'expiration.</p>
+        <p>Le montant est de <span style="color: rgb(14, 107, 49);font-weight:bold"><?php echo str_replace('.',',',$somme) ?>€</span></p>
         <div id="card-errors" class="error mb-4"></div>
         <form action="" method="post" id="payment">
             <div class="mb-3">

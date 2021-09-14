@@ -1,0 +1,8 @@
+[04-Aug-2021 04:22:06 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[05-Aug-2021 06:27:47 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[05-Aug-2021 12:24:16 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[09-Aug-2021 08:59:02 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[10-Aug-2021 09:28:47 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[13-Sep-2021 03:29:09 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/argenteuil/cart/index.php on line 18
+[13-Sep-2021 03:29:09 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:56:26 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147

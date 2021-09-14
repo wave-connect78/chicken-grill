@@ -1,0 +1,16 @@
+[09-Sep-2021 05:59:42 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function Image() on null in /home2/chickill/public_html/inc/functions.php:8
+Stack trace:
+#0 /home2/chickill/public_html/inc/fpdf/fpdf.php(334): PDF->Header()
+#1 /home2/chickill/public_html/inc/functions.php(34): FPDF->AddPage()
+#2 /home2/chickill/public_html/argenteuil/commande-validation/index.php(118): generatePdf(Object(PDF), 'argenteuil', '149 av Jean Jau...', '06 21 52 65 93', 'Rod coding', 'kwayeprodrigue@...', '0565985659', 7199, 'txn_3JXkynLRaPg...', '7199-rod_coding')
+#3 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 8
+[09-Sep-2021 06:03:30 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function Image() on null in /home2/chickill/public_html/inc/functions.php:8
+Stack trace:
+#0 /home2/chickill/public_html/inc/fpdf/fpdf.php(334): PDF->Header()
+#1 /home2/chickill/public_html/inc/functions.php(34): FPDF->AddPage()
+#2 /home2/chickill/public_html/argenteuil/commande-validation/index.php(118): generatePdf(Object(PDF), 'argenteuil', '149 av Jean Jau...', '06 21 52 65 93', 'Rod coding', 'kwayeprodrigue@...', '0565985659', 1420, 'txn_3JXl2TLRaPg...', '1420-rod_coding')
+#3 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 8
+[09-Sep-2021 07:47:45 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/inc/functions.php on line 116
+[09-Sep-2021 07:47:45 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/chickill/public_html/inc/functions.php on line 131

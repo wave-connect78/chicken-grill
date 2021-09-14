@@ -1,0 +1,53 @@
+[16-Jul-2021 05:31:11 America/Chicago] PHP Warning:  Use of undefined constant count - assumed 'count' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/admin/index.php on line 463
+[16-Jul-2021 05:33:09 America/Chicago] PHP Warning:  Use of undefined constant count - assumed 'count' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/admin/index.php on line 461
+[16-Jul-2021 05:37:59 America/Chicago] PHP Warning:  Use of undefined constant count - assumed 'count' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/admin/index.php on line 461
+[26-Jul-2021 03:37:03 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chickill_chickengrill.manager_stock' doesn't exist in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 03:37:45 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'product_id' in on clause is ambiguous in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 03:59:59 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'field list' in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 04:02:19 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'field list' in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 04:29:52 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 04:31:24 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 04:35:12 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /home2/chickill/public_html/inc/functions.php on line 19
+[27-Jul-2021 04:17:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function NOW() in /home2/chickill/public_html/admin/index.php:204
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 204
+[27-Jul-2021 04:18:13 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function NOW() in /home2/chickill/public_html/admin/index.php:204
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 204
+[27-Jul-2021 04:20:58 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function echodate() in /home2/chickill/public_html/admin/index.php:204
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 204
+[24-Aug-2021 10:18:21 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:804
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:19:51 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:804
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:20:33 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:804
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:21:34 America/Chicago] PHP Parse error:  syntax error, unexpected '?>' in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:21:44 America/Chicago] PHP Parse error:  syntax error, unexpected '?>' in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:24:55 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:804
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:26:18 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:804
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 804
+[24-Aug-2021 10:27:46 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:800
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 800
+[24-Aug-2021 10:28:30 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function data() in /home2/chickill/public_html/admin/index.php:800
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/admin/index.php on line 800
+[07-Sep-2021 09:16:40 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'codepromo_id' in 'where clause' in /home2/chickill/public_html/inc/functions.php on line 19

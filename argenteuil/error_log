@@ -1,0 +1,29 @@
+[12-Jul-2021 10:24:32 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1044] Access denied for user 'chickill_ckgrill'@'localhost' to database 'chickill_chickengrill' in /home2/chickill/public_html/inc/init.php:4
+Stack trace:
+#0 /home2/chickill/public_html/inc/init.php(4): PDO->__construct('mysql:host=loca...', 'chickill_ckgril...', 'chicken.grill', Array)
+#1 /home2/chickill/public_html/argenteuil/index.php(2): require_once('/home2/chickill...')
+#2 {main}
+  thrown in /home2/chickill/public_html/inc/init.php on line 4
+[13-Jul-2021 03:18:18 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1044] Access denied for user 'chickill_ckgrill'@'localhost' to database 'chickill_chickengrill' in /home2/chickill/public_html/inc/init.php:4
+Stack trace:
+#0 /home2/chickill/public_html/inc/init.php(4): PDO->__construct('mysql:host=loca...', 'chickill_ckgril...', 'g@KhWpHB#F4r', Array)
+#1 /home2/chickill/public_html/argenteuil/index.php(2): require_once('/home2/chickill...')
+#2 {main}
+  thrown in /home2/chickill/public_html/inc/init.php on line 4
+[13-Jul-2021 03:18:31 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1044] Access denied for user 'chickill_ckgrill'@'localhost' to database 'chickill_chickengrill' in /home2/chickill/public_html/inc/init.php:4
+Stack trace:
+#0 /home2/chickill/public_html/inc/init.php(4): PDO->__construct('mysql:host=loca...', 'chickill_ckgril...', 'g@KhWpHB#F4r', Array)
+#1 /home2/chickill/public_html/argenteuil/index.php(2): require_once('/home2/chickill...')
+#2 {main}
+  thrown in /home2/chickill/public_html/inc/init.php on line 4
+[19-Jul-2021 05:59:16 America/Chicago] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home2/chickill/public_html/inc/footer.php on line 2
+[19-Jul-2021 05:59:16 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home2/chickill/public_html/inc/footer.php on line 2
+[19-Jul-2021 06:01:52 America/Chicago] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home2/chickill/public_html/inc/footer.php on line 2
+[19-Jul-2021 06:01:52 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home2/chickill/public_html/inc/footer.php on line 2
+[19-Jul-2021 06:02:39 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 3
+[19-Jul-2021 06:02:55 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 3
+[19-Jul-2021 07:03:08 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 4
+[19-Jul-2021 07:14:06 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 5
+[19-Jul-2021 07:15:46 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 5
+[19-Jul-2021 07:16:36 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 5
+[19-Jul-2021 07:20:36 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/chickill/public_html/inc/header.php:5) in /home2/chickill/public_html/inc/footer.php on line 5

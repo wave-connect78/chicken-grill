@@ -1,0 +1,14 @@
+[19-Jul-2021 09:33:23 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/argenteuil/product-detail/index.php:111
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/argenteuil/product-detail/index.php on line 111
+[19-Jul-2021 09:37:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/argenteuil/product-detail/index.php:111
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/argenteuil/product-detail/index.php on line 111
+[19-Jul-2021 09:39:01 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function str_contains() in /home2/chickill/public_html/argenteuil/product-detail/index.php:111
+Stack trace:
+#0 {main}
+  thrown in /home2/chickill/public_html/argenteuil/product-detail/index.php on line 111
+[13-Sep-2021 03:28:50 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:56:15 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147

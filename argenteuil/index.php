@@ -2,12 +2,12 @@
     require_once '../inc/init.php';
 
 
-    $_SESSION['actuelPage']['nom_resto'] = 'argenteuil';
-    $_SESSION['actuelPage']['adresse'] = '149 av Jean Jaurè 95100 Argenteuil';
+    $_SESSION['actuelPage']['nom_resto'] = 'Argenteuil';
+    $_SESSION['actuelPage']['adresse'] = '149 av Jean Jaurès 95100 Argenteuil';
     
-    $title = 'Accueil asniers';
+    $title = 'Accueil Argenteuil';
     $email = 'chickengrill.argenteuil95@gmail.com';
-    $tel = '07 65 45 88 89';
+    $tel = '06 21 52 65 93';
     require_once '../inc/header.php';
 
 ?>
@@ -78,7 +78,7 @@
 
 <script>
     $(function(){
-        let URL = 'http://localhost/chicken-grill/';
+        let URL = 'https://chicken-grill.fr/';
         $(window).on('load',function(){
             $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
             $.post('../inc/controls.php',{postType:'homeData'},function(res){

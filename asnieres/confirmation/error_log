@@ -1,0 +1,93 @@
+[13-Sep-2021 03:14:17 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:26:14 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:26:14 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 25 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(25): sendMail('chickengrill.as...', 'agnaouamin@gmai...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:30:01 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:30:01 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 25 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(25): sendMail('chickengrill.as...', 'agnaouamin@gmai...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:36:49 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:36:49 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 25 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(25): sendMail('chickengrill.as...', 'agnaouamin@gmai...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:37:56 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:37:56 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 25 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(25): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:43:19 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:43:19 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 26 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(26): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:44:12 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:44:12 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 26 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(26): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:44:17 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:44:17 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 26 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(26): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:44:51 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:45:33 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:45:33 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 50 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(50): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:45:44 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:45:44 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 50 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(50): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:46:24 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:46:24 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 51 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(51): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', '<h3>Merci pour ...', true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:47:02 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:47:30 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:48:00 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:48:00 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 51 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(51): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', NULL, true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:48:31 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:48:31 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 51 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(51): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', NULL, true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:48:43 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:48:43 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 51 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(51): sendMail('chickengrill.as...', 'kwayeprodrigue@...', 'Confirmation de...', NULL, true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:48:54 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:48:54 America/Chicago] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function sendMail(), 5 passed in /home2/chickill/public_html/asnieres/confirmation/index.php on line 51 and exactly 7 expected in /home2/chickill/public_html/inc/functions.php:238
+Stack trace:
+#0 /home2/chickill/public_html/asnieres/confirmation/index.php(51): sendMail('chickengrill.as...', 'kwayeprodrigue@...', NULL, NULL, true)
+#1 {main}
+  thrown in /home2/chickill/public_html/inc/functions.php on line 238
+[13-Sep-2021 03:49:41 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:50:08 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:51:25 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:52:04 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147
+[13-Sep-2021 03:59:47 America/Chicago] PHP Warning:  Use of undefined constant userOn - assumed 'userOn' (this will throw an Error in a future version of PHP) in /home2/chickill/public_html/inc/header.php on line 147

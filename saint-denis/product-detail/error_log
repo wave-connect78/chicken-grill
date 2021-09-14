@@ -1,0 +1,4 @@
+[26-Jul-2021 07:57:22 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'where clause' in /home2/chickill/public_html/inc/functions.php on line 19
+[26-Jul-2021 07:58:08 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'where clause' in /home2/chickill/public_html/inc/functions.php on line 19
+[28-Jul-2021 05:02:58 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'where clause' in /home2/chickill/public_html/inc/functions.php on line 19
+[28-Jul-2021 05:03:22 America/Chicago] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'P.product_id' in 'where clause' in /home2/chickill/public_html/inc/functions.php on line 19

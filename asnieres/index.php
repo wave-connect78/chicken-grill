@@ -3,10 +3,10 @@
 
 
 
-    $title = 'Accueil asniers';
+    $title = 'Accueil Asnieres';
     $email = 'chickengrill.asnieres@gmail.com';
-    $tel = '07 65 45 88 89';
-    $_SESSION['actuelPage']['nom_resto'] = 'asnieres';
+    $tel = '01 47 28 04 60';
+    $_SESSION['actuelPage']['nom_resto'] = 'Asnieres';
     $_SESSION['actuelPage']['adresse'] = '104 rue Émile Zola 92600 Asnières sur seine';
     require_once '../inc/header.php';
 ?>
@@ -77,7 +77,7 @@
 
 <script>
     $(function(){
-        let URL = 'http://localhost/chicken-grill/';
+        let URL = 'https://chicken-grill.fr/';
         $(window).on('load',function(){
             $('body').prepend('<div class="load"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>');
             $.post('../inc/controls.php',{postType:'homeData'},function(res){

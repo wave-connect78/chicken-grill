@@ -3,7 +3,11 @@
 
     $title = "Nous contacter";
     $email = 'chickengrill.asnieres@gmail.com';
-    $tel = '07 65 45 88 89';
+    $tel = '01 47 28 04 60';
+    if(!isset($_SESSION['actuelPage'])){
+        header('location:https://chicken-grill.fr/');
+        exit;
+    }
     require_once '../../inc/header.php';
 
 
@@ -12,39 +16,40 @@
     <h2>Nos différents points de vente</h2>
     <div class="restaurant">
         <div class="bloc">
-            <h5>Chicken grill asnieres</h5>
+            <h5>Chicken grill Asnieres</h5>
             <p><i class="fas fa-map-marker-alt"></i>Adresse : 104 rue Émile Zola 92600 Asnières sur seine</p>
-            <p><i class="fas fa-phone-alt"></i>Tel : 01 71 67 75 41</p>
-            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.asnieres@gmail.com">Chicken grill asnieres</a></p>
+            <p><i class="fas fa-phone-alt"></i>Tel : 01 47 28 04 60</p>
+            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.asnieres@gmail.com">Chicken grill Asnieres</a></p>
         </div>
         <div class="bloc">
-            <h5>Chicken grill argenteuil</h5>
-            <p><i class="fas fa-map-marker-alt"></i>Adresse : 149 av Jean Jaurè 95100 Argenteuil</p>
-            <p><i class="fas fa-phone-alt"></i>Tel : 01 71 67 75 41</p>
-            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.argenteuil95@gmail.com">Chicken grill argenteuil</a></p>
+            <h5>Chicken grill Argenteuil</h5>
+            <p><i class="fas fa-map-marker-alt"></i>Adresse : 149 av Jean Jaurès 95100 Argenteuil</p>
+            <p><i class="fas fa-phone-alt"></i>Tel : 06 21 52 65 93</p>
+            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.argenteuil95@gmail.com">Chicken grill Argenteuil</a></p>
         </div>
         <div class="bloc">
-            <h5>Chicken grill bezons</h5>
+            <h5>Chicken grill Bezons</h5>
             <p><i class="fas fa-map-marker-alt"></i>Adresse : 16 rue de Montesson 95870 Bezons</p>
             <p><i class="fas fa-phone-alt"></i>Tel : 01 71 67 75 41</p>
-            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.bezons@gmail.com">Chicken grill bezon</a></p>
+            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.bezons@gmail.com">Chicken grill Bezons</a></p>
         </div>
         <div class="bloc">
-            <h5>Chicken grill saint-denis</h5>
+            <h5>Chicken grill Saint-Denis</h5>
             <p><i class="fas fa-map-marker-alt"></i>Adresse : 67 rue Gabriel Péri 93200 Saint Denis</p>
-            <p><i class="fas fa-phone-alt"></i>Tel : 01 71 67 75 41</p>
-            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrillsaintdenis@gmail.com">Chicken grill saint-denis</a></p>
+            <p><i class="fas fa-phone-alt"></i>Tel : 09 53 37 75 04</p>
+            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrillsaintdenis@gmail.com">Chicken grill Saint-Denis</a></p>
         </div>
         <div class="bloc">
-            <h5>Chicken grill epinay/seine</h5>
-            <p><i class="fas fa-map-marker-alt"></i>Adresse : 27 impasse du noyer bossu 93800 Epinay sur seine</p>
-            <p><i class="fas fa-phone-alt"></i>Tel : 01 71 67 75 41</p>
-            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.93800@gmail.com">Chicken grill epinay/seine</a></p>
+            <h5>Chicken grill Epinay/Seine</h5>
+            <p><i class="fas fa-map-marker-alt"></i>Adresse : 27 impasse du Noyer Bossu 93800 Epinay sur Seine</p>
+            <p><i class="fas fa-phone-alt"></i>Tel : 09 53 36 02 17</p>
+            <p><i class="fas fa-envelope"></i>Email : <a href="mailto:chickengrill.93800@gmail.com">Chicken grill Epinay/Seine</a></p>
         </div>
     </div>
     
     <div class="formcontact">
-    <h3 class="mb-5 mt-5">Nous envoyer un message</h3>
+        <h3 class="mb-5 mt-5">Nous envoyer un message</h3>
+        <div class="message"></div>
         <form action="" method="post">
             <div class="mb-3">
                 <label for="nom" class="form-label">Votre nom complet</label>
@@ -52,20 +57,49 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Votre adresse email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Votre adersse mail">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Votre adresse mail">
             </div>
             <div class="mb-3">
-                <label for="objet" class="form-label">L'objet de votre méssage</label>
-                <input type="text" class="form-control" id="objet" name="objet" placeholder="L'objet de votre méssage">
+                <label for="objet" class="form-label">L'objet de votre message</label>
+                <input type="text" class="form-control" id="objet" name="objet" placeholder="L'objet de votre message">
             </div>
             <input type="hidden" name="restoemail" class="restoemail" value="chickengrill.asnieres@gmail.com">
             <div class="mb-3">
-                <label for="message" class="form-label" placeholder="Votre méssage">Insérer votre méssage</label>
+                <label for="message" class="form-label" placeholder="Votre méssage">Insérer votre message</label>
                 <textarea name="message" id="message" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Envoyer votre méssage</button>
+            <button type="submit" class="btn btn-primary">Envoyer votre message</button>
         </form>
     </div>
 </div>
+<script>
+    $(function(){
+        $('.formcontact form').on("submit",function(e){
+            e.preventDefault();
+            $('.formcontact form .error p').remove();
+            $('.formcontact .message div').remove();
+            let destination = $('.formcontact form .restoemail').val();
+            let nom = $('.formcontact form #nom').val();
+            let email = $('.formcontact form #email').val();
+            let objet = $('.formcontact form #objet').val();
+            let message = $('.formcontact form #message').val();
+            if (destination != '' && nom != '' && email != '' && objet != '' && message != '') {
+                $.post("../../inc/controls.php",{postType:'emailContact',destination:destination,nom:nom,email:email,objet:objet,message:message},function(res){
+                    if (res.resultat) {
+                        if (res.resultat == "emailError") {
+                            $('.formcontact form .error').append('<p>Votre email n\'est pas valide</p>');
+                        } else if(res.resultat == "messageError") {
+                            $('.formcontact .message').append('<div class="error"><p>Une erreur est survenu lors de l\'envoie du message veuillez réessayer ultérieurement</p></div>');
+                        }else{
+                            $('.formcontact .message').append('<div class="success"><p>'+res.resultat+'</p></div>');
+                        }
+                    }
+                },'json');
+            }else{
+                $('.formcontact .message').append('<div class="error"><p>Veuillez remplir tous les champs.</p></div>');
+            }
+        });
+    });
+</script>
 <?php
     require_once '../../inc/footer.php';
